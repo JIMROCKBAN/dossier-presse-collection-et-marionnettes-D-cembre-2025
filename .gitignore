@@ -1,0 +1,12 @@
+# Ignorer les fichiers Word
+*.docx
+*.doc
+
+# Ignorer les fichiers temporaires
+*.tmp
+~*
+.~*
+
+# Ignorer les scripts de renommage
+rename_images.py
+rename_images.sh
