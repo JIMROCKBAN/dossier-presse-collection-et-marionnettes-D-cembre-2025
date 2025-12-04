@@ -84,9 +84,11 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         
-        .three-images {
+        /* Galerie de trois images horizontales */
+        .three-images-gallery {
             display: flex;
             justify-content: center;
+            align-items: flex-start;
             gap: 20px;
             flex-wrap: wrap;
             margin: 40px 0;
@@ -96,31 +98,31 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
         
-        .three-images > div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .three-images-gallery .image-item {
+            flex: 0 0 auto;
+            text-align: center;
         }
         
-        .three-images img {
-            max-width: 250px;
-            height: 250px;
+        .three-images-gallery img {
+            max-width: 200px;
+            height: 200px;
             object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             transition: transform 0.3s ease;
         }
         
-        .three-images img:hover {
+        .three-images-gallery img:hover {
             transform: scale(1.03);
         }
         
-        .image-caption-small {
+        .three-images-gallery .image-caption-small {
             font-style: italic;
             color: #666;
             font-size: 12px;
             text-align: center;
             margin-top: 10px;
+            max-width: 200px;
         }
         
         .press-section {
@@ -250,6 +252,7 @@
             margin-top: 15px;
         }
         
+        /* Media Queries pour mobile */
         @media (max-width: 768px) {
             body {
                 padding: 5px;
@@ -269,13 +272,18 @@
                 height: 70px;
             }
             
-            .three-images {
+            .three-images-gallery {
                 gap: 10px;
             }
             
-            .three-images img {
-                max-width: 150px;
-                height: 150px;
+            .three-images-gallery img {
+                max-width: 120px;
+                height: 120px;
+            }
+            
+            .three-images-gallery .image-caption-small {
+                font-size: 10px;
+                max-width: 120px;
             }
             
             .press-quote {
@@ -293,12 +301,12 @@
                 height: 60px;
             }
             
-            .three-images {
+            .three-images-gallery {
                 flex-direction: column;
                 gap: 15px;
             }
             
-            .three-images img {
+            .three-images-gallery img {
                 max-width: 100%;
                 height: auto;
             }
@@ -322,7 +330,7 @@
         <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/costume_general_armure_opera_pekin.png" alt="Costume d'opéra" class="mini-image" />
         <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/singe_blanc_roi_dragon.png" alt="Spectacle" class="mini-image" />
         <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/castelet_en_bois_de_camphrier_recouvert_de_feuilles_d_or_utilis_pour_les_spectacles_de_marionnettes.png" alt="Castelet" class="mini-image" />
-        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/exposition_collection_musee_theatre_forain_artenay.png" alt="Exposition" class="mini-image" />
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/palanquin_ombres_he_pei.png" alt="Palanquin" class="mini-image" />
     </div>
 </div>
 
@@ -360,17 +368,17 @@
     </div>
 </div>
 
-<!-- Trois images alignées horizontalement -->
-<div class="three-images">
-    <div>
+<!-- Trois images sur la même ligne horizontale -->
+<div class="three-images-gallery">
+    <div class="image-item">
         <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/palanquin_ombres_he_pei.png" alt="Palanquin, ombres du He Pei" />
         <div class="image-caption-small">Palanquin, ombres du He Pei</div>
     </div>
-    <div>
+    <div class="image-item">
         <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_fu_jian_premier_ministre.png" alt="Marionnette du Fu Jian - Premier ministre" />
         <div class="image-caption-small">Marionnette du Fu Jian - Premier ministre</div>
     </div>
-    <div>
+    <div class="image-item">
         <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombre_shanxi_general_barbare.png" alt="Ombre du Shanxi - Général barbare" />
         <div class="image-caption-small">Ombre du Shanxi - Général barbare</div>
     </div>
@@ -394,6 +402,11 @@
 <div class="image-container">
     <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/castelet_en_bois_de_camphrier_recouvert_de_feuilles_d_or_utilis_pour_les_spectacles_de_marionnettes.png" alt="Castelet en bois de camphrier recouvert de feuilles d'or" />
     <div class="image-caption">Castelet en bois de camphrier recouvert de feuilles d'or utilisé pour les spectacles de marionnettes</div>
+</div>
+
+<div class="image-container">
+    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/costume_general_armure_opera_pekin.png" alt="Costume de général, armure - Opéra de Pékin" />
+    <div class="image-caption">Costume de général, armure. Opéra de Pékin</div>
 </div>
 
 <div class="content-section">
@@ -420,6 +433,11 @@
 </div>
 
 <div class="image-container">
+    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnettes_gaines.png" alt="Marionnettes à gaines" />
+    <div class="image-caption">Marionnettes à gaines</div>
+</div>
+
+<div class="image-container">
     <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombres_shanxi_dong_lu_palais_imperial.png" alt="Ombres du ShanXi style Dong Lu - Palais impérial" />
     <div class="image-caption">Ombres du ShanXi style Dong Lu palais impérial</div>
 </div>
@@ -434,6 +452,7 @@
     <div class="image-caption">Marionnette à fils "Tien Du Yuan Shuia" Le Maréchal Tien Du protecteur des marionnettistes</div>
 </div>
 
+<!-- Spectacle L'Enfant Magique et le Roi Dragon -->
 <div class="content-section">
     <h2 class="show-title">L'Enfant Magique et le Roi Dragon</h2>
     <p class="show-subtitle">Spectacle musical d'ombres chinoises</p>
@@ -454,6 +473,7 @@
     <p><em>« L'Enfant Magique et le Roi Dragon » a été le premier spectacle invité au Musée du Quai Branly.</em></p>
 </div>
 
+<!-- Critiques presse L'Enfant Magique -->
 <div class="press-section">
     <h3 class="section-title">Le spectacle vu par la presse française…</h3>
     
@@ -473,6 +493,7 @@
     </div>
 </div>
 
+<!-- Spectacle Le Singe Blanc et le Roi Dragon -->
 <div class="content-section">
     <h2 class="show-title">Le Singe Blanc et le Roi Dragon</h2>
     <p class="show-subtitle">Spectacle musical de marionnettes</p>
@@ -487,6 +508,7 @@
     <p><strong>Son arrogance le pousse à s'en prendre à bien plus fort que lui, son humour séduit le rétif, sa ruse suscite l'admiration de tous. Il a quelques raisons d'être sûr de lui : Bouddha préside à sa naissance. Il apprend l'art des métamorphoses en un instant, et même le roi des Buffles ne lui fait pas peur. Mais le roi des singes est trop ambitieux : il veut être empereur à la place de l'empereur de Jade. Ni la force ni la ruse ne parviennent à le calmer. Alors, le Roi Dragon dérouille au fond des océans et le Roi des Enfers est envoyé à tous les diables. Cela se terminera mal (momentanément) pour le Singe Blanc, mais ceci est une autre histoire !</strong></p>
 </div>
 
+<!-- Critiques presse Le Singe Blanc -->
 <div class="press-section">
     <h3 class="section-title">Le Singe Blanc et le Roi Dragon vu par la presse…</h3>
     
