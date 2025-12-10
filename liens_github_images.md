@@ -111,8 +111,19 @@ Voici les liens publics GitHub pour toutes les images du dossier presse "Collect
 
 <!-- Spectacle musical -->
 <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/spectacle_musical_d_ombres_chinoises.png" alt="Spectacle musical d'ombres chinoises" style="max-width: 100%; height: auto;">
+
+<!-- Costume de premier Ministre -->
+<img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/costume_premier_ministre_opera_pekin_soie_fil_or.png" alt="Costume de premier Ministre, opéra de Pékin (soie et fil d'or)" style="max-width: 100%; height: auto;">
+
+<!-- Marionnette de près 1 -->
+<img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_de_pres_1.jpeg" alt="Marionnette de près 1" style="max-width: 100%; height: auto;">
+
+<!-- Marionnette de près 2 -->
+<img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_de_pres_2.jpeg" alt="Marionnette de près 2" style="max-width: 100%; height: auto;">
 ```
 
 ---
 
 **Note :** Tous ces liens sont maintenant accessibles publiquement et peuvent être utilisés directement dans des pages web, des emails HTML, ou tout autre média numérique.
+
+**Total : 16 images disponibles sur le repository GitHub.**
