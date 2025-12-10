@@ -60,13 +60,13 @@ Voici les liens publics GitHub pour toutes les images du dossier presse "Collect
     - Nom du fichier : `costume_premier_ministre_opera_pekin_soie_fil_or.png`
     - Lien public : https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/costume_premier_ministre_opera_pekin_soie_fil_or.png
 
-15. **Marionnette de près 1**
-    - Nom du fichier : `marionnette_de_pres_1.jpeg`
-    - Lien public : https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_de_pres_1.jpeg
+15. **Marionnette à gaine de près**
+    - Nom du fichier : `marionnette_gaine_de_pres.jpeg`
+    - Lien public : https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_gaine_de_pres.jpeg
 
-16. **Marionnette de près 2**
-    - Nom du fichier : `marionnette_de_pres_2.jpeg`
-    - Lien public : https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_de_pres_2.jpeg
+16. **Ombre de près**
+    - Nom du fichier : `ombre_de_pres.jpeg`
+    - Lien public : https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombre_de_pres.jpeg
 
 ---
 
@@ -115,11 +115,11 @@ Voici les liens publics GitHub pour toutes les images du dossier presse "Collect
 <!-- Costume de premier Ministre -->
 <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/costume_premier_ministre_opera_pekin_soie_fil_or.png" alt="Costume de premier Ministre, opéra de Pékin (soie et fil d'or)" style="max-width: 100%; height: auto;">
 
-<!-- Marionnette de près 1 -->
-<img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_de_pres_1.jpeg" alt="Marionnette de près 1" style="max-width: 100%; height: auto;">
+<!-- Marionnette à gaine de près -->
+<img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_gaine_de_pres.jpeg" alt="Marionnette à gaine de près" style="max-width: 100%; height: auto;">
 
-<!-- Marionnette de près 2 -->
-<img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_de_pres_2.jpeg" alt="Marionnette de près 2" style="max-width: 100%; height: auto;">
+<!-- Ombre de près -->
+<img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombre_de_pres.jpeg" alt="Ombre de près" style="max-width: 100%; height: auto;">
 ```
 
 ---
