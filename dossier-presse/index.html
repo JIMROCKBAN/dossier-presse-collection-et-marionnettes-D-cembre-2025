@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections Ombres Chinoises et marionnettes expositions et spectacles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .title {
+            color: #c62828;
+            font-family: 'Lora', Georgia, serif;
+            font-size: clamp(26px, 5.5vw, 36px);
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-family: 'Lora', Georgia, serif;
+            font-size: clamp(15px, 3.5vw, 19px);
+            font-style: italic;
+            text-align: center;
+            margin: 10px 0;
+            font-weight: 400;
+        }
+        
+        .visual-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .mini-image {
+            width: clamp(80px, 15vw, 120px);
+            height: clamp(80px, 15vw, 120px);
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .mini-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* Galerie de trois images horizontales */
+        .three-images-gallery {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .three-images-gallery .image-item {
+            flex: 0 0 auto;
+            text-align: center;
+        }
+        
+        .three-images-gallery img {
+            width: 240px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .three-images-gallery img:hover {
+            transform: scale(1.03);
+        }
+        
+        .three-images-gallery .image-caption-small {
+            font-style: italic;
+            color: #666;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 10px;
+            max-width: 240px;
+            line-height: 1.4;
+        }
+        
+        .press-section {
+            background-color: white;
+            padding: clamp(15px, 3vw, 25px);
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .press-title {
+            color: #6a1b1b;
+            font-family: 'Lora', Georgia, serif;
+            font-size: clamp(22px, 4.5vw, 30px);
+            font-weight: 600;
+            margin-bottom: 25px;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+        
+        .press-quote {
+            font-style: italic;
+            margin: 15px 0;
+            padding: 15px 20px;
+            border-left: 4px solid #3366ff;
+            background: #f8f9ff;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .press-outlet {
+            color: #0000ff;
+            font-weight: bold;
+            font-size: clamp(12px, 2.5vw, 14px);
+            margin-bottom: 5px;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        
+        .image-caption {
+            font-style: italic;
+            color: #666;
+            font-size: clamp(10px, 2vw, 12px);
+            margin-top: 8px;
+            padding: 5px 10px;
+        }
+        
+        .content-section {
+            background-color: white;
+            padding: clamp(15px, 3vw, 25px);
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .content-section p {
+            margin-bottom: 18px;
+            text-align: justify;
+            font-size: clamp(15px, 2.8vw, 17px);
+            line-height: 1.7;
+        }
+        
+        .section-title {
+            color: #c62828;
+            font-family: 'Lora', Georgia, serif;
+            font-size: clamp(22px, 4.5vw, 30px);
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 25px;
+            margin-top: 15px;
+            text-align: center;
+            letter-spacing: 0.3px;
+            line-height: 1.3;
+        }
+        
+        .theater-info {
+            background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, #e6f3ff 0%, #d1e9ff 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .show-title {
+            color: #b71c1c;
+            font-family: 'Lora', Georgia, serif;
+            font-size: clamp(24px, 5vw, 32px);
+            font-weight: 700;
+            text-align: center;
+            margin: 40px 0 20px 0;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+        }
+        
+        .show-subtitle {
+            color: #555;
+            font-family: 'Lora', Georgia, serif;
+            font-style: italic;
+            font-size: clamp(16px, 3.5vw, 20px);
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .content-section .show-subtitle {
+            text-align: center !important;
+        }
+        
+        a {
+            color: #1155cc;
+            text-decoration: underline;
+        }
+        
+        a:hover {
+            color: #0d47a1;
+        }
+        
+        .award {
+            color: #ff0000;
+            font-weight: bold;
+            font-style: italic;
+            font-size: clamp(12px, 2.5vw, 14px);
+            background: #fff5f5;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        /* Media Queries pour mobile */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .visual-gallery {
+                gap: 10px;
+                padding: 15px;
+            }
+            
+            .mini-image {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .three-images-gallery {
+                gap: 10px;
+            }
+            
+            .three-images-gallery img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .three-images-gallery .image-caption-small {
+                font-size: 10px;
+                max-width: 120px;
+            }
+            
+            .press-quote {
+                padding: 12px 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .visual-gallery {
+                gap: 8px;
+            }
+            
+            .mini-image {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .three-images-gallery {
+                gap: 8px;
+                padding: 10px;
+            }
+            
+            .three-images-gallery img {
+                width: 130px;
+                height: 130px;
+            }
+            
+            .three-images-gallery .image-caption-small {
+                font-size: 9px;
+                max-width: 140px;
+            }
+        }
+        
+        /* Lightbox pour afficher les images en grand */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s ease;
+            transition: transform 0.2s ease;
+            cursor: grab;
+        }
+        
+        .lightbox-content:active {
+            cursor: grabbing;
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            padding: 15px 25px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .zoom-slider {
+            width: 200px;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .zoom-slider-track {
+            height: 100%;
+            background: linear-gradient(90deg, #c62828, #ff5252);
+            border-radius: 3px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .zoom-slider-thumb {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            cursor: grab;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .zoom-slider-thumb:active {
+            cursor: grabbing;
+        }
+        
+        .zoom-button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+        
+        .zoom-button:hover {
+            background: rgba(198,40,40,0.8);
+        }
+        
+        .zoom-value {
+            min-width: 50px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+            line-height: 1;
+            padding-bottom: 5px;
+        }
+        
+        .lightbox-close:hover {
+            background: rgba(198,40,40,0.8);
+        }
+        
+        .clickable-image {
+            cursor: pointer;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+    <img id="lightbox-img" class="lightbox-content" src="" alt="">
+    <div class="zoom-controls">
+        <button class="zoom-button" onclick="zoomOut(event)">−</button>
+        <div class="zoom-slider" id="zoom-slider">
+            <div class="zoom-slider-track" id="zoom-slider-track"></div>
+            <div class="zoom-slider-thumb" id="zoom-slider-thumb"></div>
+        </div>
+        <button class="zoom-button" onclick="zoomIn(event)">+</button>
+        <span class="zoom-value" id="zoom-value">100%</span>
+    </div>
+</div>
+
+<script>
+let currentZoom = 1;
+let isDragging = false;
+let startX, startY, translateX = 0, translateY = 0;
+let initialPinchDistance = 0;
+let initialPinchZoom = 1;
+
+function openLightbox(imgSrc, imgAlt) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = imgSrc;
+    lightboxImg.alt = imgAlt;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Réinitialiser le zoom
+    currentZoom = 1;
+    translateX = 0;
+    translateY = 0;
+    updateZoom();
+}
+
+function closeLightbox(event) {
+    if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
+    }
+}
+
+function setZoom(zoom) {
+    currentZoom = Math.max(0.5, Math.min(5, zoom));
+    updateZoom();
+}
+
+function updateZoom() {
+    const lightboxImg = document.getElementById('lightbox-img');
+    const zoomValue = document.getElementById('zoom-value');
+    const sliderThumb = document.getElementById('zoom-slider-thumb');
+    const sliderTrack = document.getElementById('zoom-slider-track');
+    
+    lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom})`;
+    zoomValue.textContent = Math.round(currentZoom * 100) + '%';
+    
+    // Mettre à jour le slider (50% = zoom 1, 0% = zoom 0.5, 100% = zoom 5)
+    const percent = ((currentZoom - 0.5) / 4.5) * 100;
+    sliderThumb.style.left = percent + '%';
+    sliderTrack.style.width = percent + '%';
+}
+
+function zoomIn(event) {
+    event.stopPropagation();
+    setZoom(currentZoom + 0.2);
+}
+
+function zoomOut(event) {
+    event.stopPropagation();
+    setZoom(currentZoom - 0.2);
+}
+
+// Calculer distance entre deux doigts
+function getDistance(touch1, touch2) {
+    const dx = touch1.clientX - touch2.clientX;
+    const dy = touch1.clientY - touch2.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+// Zoom avec la molette
+document.getElementById('lightbox').addEventListener('wheel', function(e) {
+    if (e.target.id === 'lightbox-img' || e.target.closest('.lightbox')) {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.1 : 0.1;
+        setZoom(currentZoom + delta);
+    }
+}, { passive: false });
+
+// Empêcher le zoom de la page dans la lightbox
+document.getElementById('lightbox').addEventListener('touchstart', function(e) {
+    if (e.touches.length > 1) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+document.getElementById('lightbox').addEventListener('touchmove', function(e) {
+    if (e.touches.length > 1) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// Dragging du slider
+const zoomSlider = document.getElementById('zoom-slider');
+const zoomSliderThumb = document.getElementById('zoom-slider-thumb');
+let isSliderDragging = false;
+
+function updateZoomFromSlider(clientX) {
+    const rect = zoomSlider.getBoundingClientRect();
+    const percent = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+    const zoom = 0.5 + (percent / 100) * 4.5;
+    setZoom(zoom);
+}
+
+// Événements souris pour le slider
+zoomSlider.addEventListener('mousedown', function(e) {
+    e.stopPropagation();
+    isSliderDragging = true;
+    updateZoomFromSlider(e.clientX);
+});
+
+zoomSliderThumb.addEventListener('mousedown', function(e) {
+    e.stopPropagation();
+    isSliderDragging = true;
+});
+
+// Événements tactiles pour le slider
+zoomSlider.addEventListener('touchstart', function(e) {
+    e.stopPropagation();
+    isSliderDragging = true;
+    updateZoomFromSlider(e.touches[0].clientX);
+});
+
+zoomSliderThumb.addEventListener('touchstart', function(e) {
+    e.stopPropagation();
+    isSliderDragging = true;
+});
+
+document.addEventListener('mousemove', function(e) {
+    if (isSliderDragging) {
+        e.preventDefault();
+        updateZoomFromSlider(e.clientX);
+    }
+    
+    // Dragging de l'image
+    if (isDragging) {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        translateX += dx;
+        translateY += dy;
+        startX = e.clientX;
+        startY = e.clientY;
+        updateZoom();
+    }
+});
+
+document.addEventListener('touchmove', function(e) {
+    if (isSliderDragging) {
+        e.preventDefault();
+        updateZoomFromSlider(e.touches[0].clientX);
+    }
+    
+    // Dragging de l'image
+    if (isDragging && e.touches.length === 1) {
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        translateX += dx;
+        translateY += dy;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        updateZoom();
+    }
+});
+
+document.addEventListener('mouseup', function() {
+    isSliderDragging = false;
+    isDragging = false;
+});
+
+document.addEventListener('touchend', function() {
+    isSliderDragging = false;
+    isDragging = false;
+});
+
+// Dragging de l'image zoomée (souris)
+document.getElementById('lightbox-img').addEventListener('mousedown', function(e) {
+    if (currentZoom > 1) {
+        e.preventDefault();
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+    }
+});
+
+// Dragging de l'image zoomée (tactile)
+document.getElementById('lightbox-img').addEventListener('touchstart', function(e) {
+    if (e.touches.length === 1 && currentZoom > 1) {
+        e.preventDefault();
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    } else if (e.touches.length === 2) {
+        // Pinch to zoom
+        e.preventDefault();
+        initialPinchDistance = getDistance(e.touches[0], e.touches[1]);
+        initialPinchZoom = currentZoom;
+    }
+});
+
+// Geste pinch pour zoomer avec deux doigts
+document.getElementById('lightbox-img').addEventListener('touchmove', function(e) {
+    if (e.touches.length === 2) {
+        e.preventDefault();
+        const currentDistance = getDistance(e.touches[0], e.touches[1]);
+        const scale = currentDistance / initialPinchDistance;
+        setZoom(initialPinchZoom * scale);
+    }
+}, { passive: false });
+
+// Fermer avec la touche Échap
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' || event.key === 'Esc') {
+        const lightbox = document.getElementById('lightbox');
+        if (lightbox.classList.contains('active')) {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            currentZoom = 1;
+            translateX = 0;
+            translateY = 0;
+        }
+    }
+});
+</script>
+
+<div class="header">
+    <img src="https://static.wixstatic.com/media/66b6e6_7e5ea08afb054f2eae7e46fdcfb24d2a~mv2.jpeg" alt="Logo Théâtre du Petit Miroir" class="logo" />
+    
+    <h1 class="title">COLLECTION D'OMBRES ET DE MARIONNETTES DU THÉÂTRE DU PETIT MIROIR</h1>
+    
+    <p class="subtitle">Costumes d'opéra de Pékin, marionnettes et ombres chinoises</p>
+    <p class="subtitle">Spectacles d'ombres et de marionnettes chinoises</p>
+    
+    <!-- Citation de presse style affiche de film -->
+    <div style="margin: 25px auto; padding: 20px 25px; max-width: 700px; background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(245,245,245,0.95) 100%); border-left: 5px solid #c62828; border-right: 5px solid #c62828; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);">
+        <p style="font-size: clamp(18px, 4vw, 24px); font-style: italic; color: #1a1a1a; margin: 0; text-align: center; line-height: 1.6; font-weight: 500; letter-spacing: 0.3px;">
+            « Franchir les portes du théâtre du Petit Miroir, c'est changer de continent. »
+        </p>
+        <p style="font-size: clamp(14px, 3vw, 18px); font-weight: 700; color: #c62828; margin: 12px 0 0 0; text-align: center; letter-spacing: 1px;">
+            — Zurban
+        </p>
+    </div>
+    
+    <!-- Navigation visuelle cliquable vers les sections -->
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 30px 0; padding: 20px;">
+        <a href="#collection" style="text-decoration: none; flex: 1; min-width: 200px; max-width: 250px;">
+            <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.25)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'">
+                <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/exposition_collection_musee_theatre_forain_artenay.png" alt="La Collection du Théâtre du Petit Miroir" style="width: 100%; height: 180px; object-fit: cover;" />
+                <div style="padding: 15px; text-align: center; color: #d32f2f; font-weight: 600; font-size: clamp(15px, 3vw, 17px);">La Collection du Théâtre du Petit Miroir</div>
+            </div>
+        </a>
+        
+        <a href="#enfant-magique" style="text-decoration: none; flex: 1; min-width: 200px; max-width: 250px;">
+            <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.25)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'">
+                <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/spectacle_musical_d_ombres_chinoises.png" alt="L'Enfant Magique et le Roi Dragon" style="width: 100%; height: 180px; object-fit: cover;" />
+                <div style="padding: 15px; text-align: center;">
+                    <div style="color: #d32f2f; font-weight: 700; font-size: clamp(15px, 3vw, 17px);">L’Enfant Magique</div>
+                    <div style="color: #666; font-size: clamp(12px, 2.5vw, 14px); margin-top: 5px; font-style: italic;">spectacle musical d’ombres chinoises</div>
+                </div>
+            </div>
+        </a>
+        
+        <a href="#singe-blanc" style="text-decoration: none; flex: 1; min-width: 200px; max-width: 250px;">
+            <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.25)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'">
+                <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/singe_blanc_roi_dragon.png" alt="Le Singe Blanc et le Roi Dragon" style="width: 100%; height: 180px; object-fit: cover;" />
+                <div style="padding: 15px; text-align: center;">
+                    <div style="color: #d32f2f; font-weight: 700; font-size: clamp(15px, 3vw, 17px);">Le Singe Blanc</div>
+                    <div style="color: #666; font-size: clamp(12px, 2.5vw, 14px); margin-top: 5px; font-style: italic;">spectacle musical de marionnettes taiwanaises</div>
+                </div>
+            </div>
+        </a>
+        
+        <a href="#theatre" style="text-decoration: none; flex: 1; min-width: 200px; max-width: 250px;">
+            <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.25)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'">
+                <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/castelet_en_bois_de_camphrier_recouvert_de_feuilles_d_or_utilis_pour_les_spectacles_de_marionnettes.png" alt="Histoire du Théâtre du Petit Miroir" style="width: 100%; height: 180px; object-fit: cover;" />
+                <div style="padding: 15px; text-align: center; color: #d32f2f; font-weight: 600; font-size: clamp(15px, 3vw, 17px);">Histoire du Théâtre du Petit Miroir</div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div id="collection" class="content-section" style="background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%); padding: 40px clamp(20px, 4vw, 40px); border-radius: 15px; margin: 20px 0;">
+    <h2 class="section-title" style="margin-top: 0;">La Collection du Théâtre du Petit Miroir</h2>
+    
+    <!-- Sous-titre gros plans -->
+    <h3 style="color: #c62828; font-family: 'Lora', Georgia, serif; font-size: clamp(20px, 4vw, 26px); font-weight: 600; text-align: center; margin: 35px 0 30px 0; letter-spacing: 0.3px;">Voir de près : la finesse de l'artisanat chinois</h3>
+    
+    <div style="display: flex; justify-content: center; align-items: flex-start; gap: 30px; flex-wrap: wrap; margin-top: 30px; margin-bottom: 50px;">
+        <div style="flex: 1; min-width: 280px; max-width: 450px; text-align: center;">
+            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_gaine_de_pres.jpeg" alt="Gros plan sur une marionnette à gaine" class="clickable-image" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="openLightbox(this.src, this.alt)"/>
+            <div style="margin-top: 15px; font-size: clamp(14px, 3vw, 16px); color: #333; font-weight: 500;">Marionnettes à gaine - Détail de la tête</div>
+            <div style="margin-top: 8px; font-size: clamp(12px, 2.5vw, 14px); color: #666; font-style: italic;">Finesse du maquillage et des expressions</div>
+        </div>
+        
+        <div style="flex: 1; min-width: 280px; max-width: 450px; text-align: center;">
+            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombre_de_pres.jpeg" alt="Gros plan sur une ombre chinoise" class="clickable-image" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="openLightbox(this.src, this.alt)"/>
+            <div style="margin-top: 15px; font-size: clamp(14px, 3vw, 16px); color: #333; font-weight: 500;">Ombre chinoise - Détail du visage</div>
+            <div style="margin-top: 8px; font-size: clamp(12px, 2.5vw, 14px); color: #666; font-style: italic;">Ciselage délicat de la peau de buffle</div>
+        </div>
+    </div>
+    
+    <!-- Galerie de trois pièces remarquables - IMAGES PLUS GRANDES -->
+    <div style="display: flex; justify-content: center; align-items: flex-start; gap: 30px; flex-wrap: wrap; margin: 40px 0;">
+        <div style="flex: 0 1 300px; text-align: center;">
+            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/palanquin_ombres_he_pei.png" alt="Palanquin, ombres du He Pei" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="openLightbox(this.src, this.alt)"/>
+            <div style="margin-top: 12px; font-size: clamp(13px, 2.8vw, 15px); color: #555; font-style: italic; line-height: 1.4;">Palanquin, ombres du He Pei</div>
+        </div>
+        <div style="flex: 0 1 300px; text-align: center;">
+            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_fu_jian_premier_ministre.png" alt="Marionnette du Fu Jian - Premier ministre" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="openLightbox(this.src, this.alt)"/>
+            <div style="margin-top: 12px; font-size: clamp(13px, 2.8vw, 15px); color: #555; font-style: italic; line-height: 1.4;">Marionnette du Fu Jian - Premier ministre</div>
+        </div>
+        <div style="flex: 0 1 300px; text-align: center;">
+            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombre_shanxi_general_barbare.png" alt="Ombre du Shanxi - Général barbare" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="openLightbox(this.src, this.alt)"/>
+            <div style="margin-top: 12px; font-size: clamp(13px, 2.8vw, 15px); color: #555; font-style: italic; line-height: 1.4;">Ombre du Shanxi - Général barbare</div>
+        </div>
+    </div>
+    
+    <h3 style="color: #c62828; font-family: 'Lora', Georgia, serif; font-size: clamp(20px, 4vw, 26px); font-weight: 600; text-align: center; margin: 50px 0 30px 0; letter-spacing: 0.3px;">Un panorama des arts du spectacle chinois</h3>
+    
+    <div style="text-align: center; margin: 30px 0;">
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/exposition_collection_musee_theatre_forain_artenay.png" alt="Exposition de la collection - Musée du théâtre forain, Artenay" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer;" onclick="openLightbox(this.src, this.alt)"/>
+        <div style="font-style: italic; color: #666; font-size: clamp(12px, 2.5vw, 14px); margin-top: 10px;">Exposition de la collection - Musée du théâtre forain, Artenay</div>
+    </div>    
+    <p style="margin-bottom: 18px; text-align: justify; font-size: clamp(15px, 2.8vw, 17px); line-height: 1.7;">Depuis 1976, le Théâtre du Petit Miroir s'est attaché à recueillir des marionnettes, des ombres, et des costumes d'opéra jusque dans les régions les plus reculées de Chine et de Taiwan.</p>
+    
+    <p style="margin-bottom: 18px; text-align: justify; font-size: clamp(15px, 2.8vw, 17px); line-height: 1.7;">Sauvées des destructions d'objets d'art ordonnées par les autorités chinoises en 1966, ou, pour celles venant de Taiwan, témoins d'une culture traditionnelle aujourd'hui menacée de disparition par le fulgurant développement économique de l'île, ces ombres et ces marionnettes sont présentées en exposition par le Théâtre du Petit Miroir et utilisées dans ses spectacles.</p>
+    
+    <div style="text-align: center; margin: 35px 0;">
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/castelet_en_bois_de_camphrier_recouvert_de_feuilles_d_or_utilis_pour_les_spectacles_de_marionnettes.png" alt="Castelet en bois de camphrier recouvert de feuilles d'or" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer;" onclick="openLightbox(this.src, this.alt)"/>
+        <div style="font-style: italic; color: #666; font-size: clamp(12px, 2.5vw, 14px); margin-top: 10px;">Castelet en bois de camphrier recouvert de feuilles d'or utilisé pour les spectacles de marionnettes</div>
+    </div>
+    
+    <div style="text-align: center; margin: 35px 0;">
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/costume_general_armure_opera_pekin.png" alt="Costume de général, armure - Opéra de Pékin" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer;" onclick="openLightbox(this.src, this.alt)"/>
+        <div style="font-style: italic; color: #666; font-size: clamp(12px, 2.5vw, 14px); margin-top: 10px;">Costume de général, armure. Opéra de Pékin</div>
+    </div>    
+    <p style="margin-bottom: 18px; text-align: justify; font-size: clamp(15px, 2.8vw, 17px); line-height: 1.7;">L'exposition présentée par le Théâtre du Petit Miroir comprend des marionnettes des 19ème et 20ème siècles - marionnettes à gaine, à tiges, à fils, provenant des différentes provinces de la Chine.</p>
+    
+    <p style="margin-bottom: 18px; text-align: justify; font-size: clamp(15px, 2.8vw, 17px); line-height: 1.7;">Les <strong>marionnettes à gaine</strong> (budaixi 布袋戲), manipulées par la main du marionnettiste glissée dans le costume, incarnent une tradition vivante particulièrement ancrée dans le Fujian et à Taiwan. Les <strong>marionnettes à tiges</strong> (zhangzhongmu 掌中木), contrôlées par des baguettes fixées à la tête et aux mains, permettent des mouvements d'une grande précision. Les <strong>marionnettes à fils</strong> (kuileixi 傀儡戲), suspendues et animées par un système complexe de fils, peuvent exécuter des actions acrobatiques spectaculaires. Ces trois techniques, héritières d'une tradition millénaire, partagent avec l'Opéra de Pékin un même répertoire, une même esthétique gestuelle et un même langage musical.</p>
+    
+    <p style="margin-bottom: 18px; text-align: justify; font-size: clamp(15px, 2.8vw, 17px); line-height: 1.7;">Les <strong>panneaux d'ombres</strong> (piyingxi 皮影戏), personnages, animaux et décors, sont regroupés par thème. Ces ombres, pour l'essentiel originaires de la province du Shanxi et de la province du Hebei, remontent au 19ème siècle.</p>
+    
+    <p style="margin-bottom: 18px; text-align: justify; font-size: clamp(15px, 2.8vw, 17px); line-height: 1.7;">À côté des marionnettes, la collection comprend des livrets de conteur-récitant pour théâtre d'ombres, des coffres pour le transport des marionnettes, des albums pour classer les ombres, des décors en toile peinte, un castelet en bois de camphrier recouvert de feuilles d'or, ainsi que des costumes et des coiffes d'opéra chinois.</p>
+    
+    <p style="margin-bottom: 18px; text-align: justify; font-size: clamp(15px, 2.8vw, 17px); line-height: 1.7;">Récemment acquis, une dizaine de magnifiques costumes d'opéra chinois, en soie et finement brodés complètent la collection et explicitent les liens profonds entre théâtre de marionnettes, théâtre d'ombres et opéra en Chine.</p>
+    
+    <p style="margin-bottom: 25px; text-align: justify; font-size: clamp(15px, 2.8vw, 17px); line-height: 1.7;">La collection constitue également un formidable support pour des conférences, des animations et des ateliers pédagogiques offrant un panorama complet de l'art des marionnettes et des ombres en Chine.</p>
+    
+    <div style="text-align: center; margin: 35px 0 0 0;">
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/livret_de_conteur_r_citant_th_tre_d_ombres_du_shanxi.png" alt="Livret de conteur-récitant pour théâtre d'ombres" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer;" onclick="openLightbox(this.src, this.alt)"/>
+        <div style="font-style: italic; color: #666; font-size: clamp(12px, 2.5vw, 14px); margin-top: 10px;">Livret de conteur-récitant pour théâtre d'ombres</div>
+    </div>
+</div>
+
+<div class="press-section">
+    <h2 class="press-title">La collection vue par la presse</h2>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Libération</div>
+        <p>…une théorie de têtes nues totalement décapées, révèle de fins visages aux expressions presque bouddhistes… sur les murs se déploie une délicate frise de personnages, d'animaux et de décors exquisément ciselés : des ombres chinoises pour la plupart rescapées de la Révolution culturelle.</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Le Monde</div>
+        <p><em>D'éblouissantes marionnettes à gaine...</em></p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Nord Eclair</div>
+        <p>Les marionnettes et autres ombres exposées sont tout simplement magnifiques… Cette exposition présentée par le théâtre du Petit Miroir est exceptionnelle par sa richesse…</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">La Voix du Nord</div>
+        <p>L'exposition du théâtre du Petit Miroir… présente une trentaine de panneaux d'ombres et des marionnettes toutes plus originales les unes que les autres. La disposition des panneaux magnifie la subtilité des couleurs et la richesse des mouvements. Les ombres et les marionnettes exposées ont réellement séduit le public.</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Télérama</div>
+        <p>Une véritable collection rescapée de la Révolution culturelle.</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Zurban</div>
+        <p>Franchir les portes du théâtre du Petit Miroir, c'est changer de continent. Après des années en Asie, le théâtre du Petit Miroir a posé son castelet rouge et or et sa fabuleuse collection de marionnettes chinoises anciennes à Issy les Moulineaux. <em>A découvrir.</em></p>
+    </div>
+</div>
+
+<div id="theatre" class="content-section">
+    <h3 class="section-title">Histoire du Théâtre du Petit Miroir</h3>
+    
+    <div class="image-container">
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/castelet_en_bois_de_camphrier_recouvert_de_feuilles_d_or_utilis_pour_les_spectacles_de_marionnettes.png" alt="Castelet en bois de camphrier recouvert de feuilles d'or" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
+        <div class="image-caption">Castelet en bois de camphrier recouvert de feuilles d'or utilisé pour les spectacles de marionnettes</div>
+    </div>
+    
+    <div class="theater-info">
+        <p>Initié à Taiwan pendant 5 ans à l'art du théâtre de marionnettes et du théâtre d'ombres par Li Tien Lu, un des derniers grands maîtres de marionnettes de l'île, Jean-Luc Penso a créé en 1976 le Théâtre du Petit Miroir. La compagnie se consacre à la création de spectacles contemporains et à la diffusion de spectacles de marionnettes et d'ombres chinoises.</p>
+        
+        <p>La technique théâtrale des marionnettes et des ombres chinoises est aussi élaborée que celle de l'Opéra de Pékin qui s'en est inspiré, ces formes de spectacle sont très liées : même répertoire, même musique et même code.</p>
+        
+        <p>Si les marionnettes ont emprunté à l'opéra les maquillages colorés et complexes, les costumes richement brodés et la musique aux larges accents percutants, la stylisation très poussée des mouvements des acteurs chinois prend clairement sa source dans la gestuelle des marionnettes.</p>
+        
+        <p>Le Théâtre du Petit Miroir a créé une trentaine de pièces, souvent tirées des grands textes de la littérature mondiale, jouées sur cinq continents dans plus de quatre-vingt dix pays.</p>
+        
+        <p>À Paris, ses spectacles ont été présentés au Théâtre National de Chaillot, au Théâtre de la Ville, à l'Académie Française, au Centre Pompidou, au Musée Guimet, au Musée du quai Branly, à la Cité de la Musique et sur la Terrasse des Jeux lors des J.O. 2024. En régions et à l'international, le Théâtre du Petit Miroir se produit dans des théâtres, festivals, musées et centres culturels.</p>
+        
+        <p class="award">En octobre 2006, Jean-Luc Penso a reçu le Grand Prix de l'Académie des Sciences Morales et Politiques pour l'ensemble de son travail.</p>
+    </div>
+</div>
+
+<div class="image-container">
+    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnettes_gaines.png" alt="Marionnettes à gaines" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
+    <div class="image-caption">Marionnettes à gaines</div>
+</div>
+
+<div class="image-container">
+    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombres_shanxi_dong_lu_palais_imperial.png" alt="Ombres du Shanxi, style Dong Lu (route de l'Est) – Palais impérial" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
+    <div class="image-caption">Ombres du Shanxi, style Dong Lu (route de l'Est) – Palais impérial</div>
+</div>
+
+<div class="image-container">
+    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombres_shanxi_dong_lu_procession_imperiale.png" alt="Ombres du Shanxi, style Dong Lu (route de l'Est) – Procession impériale" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
+    <div class="image-caption">Ombres du Shanxi, style Dong Lu (route de l'Est) – Procession impériale</div>
+</div>
+
+<div class="image-container">
+    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/costume_premier_ministre_opera_pekin_soie_fil_or.png" alt="Costume de premier Ministre, opéra de Pékin (soie et fil d'or)" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
+    <div class="image-caption">Costume de premier Ministre, opéra de Pékin (soie et fil d'or)</div>
+</div>
+
+<div class="image-container">
+    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_fils_tien_du_yuan_shuia_le_mar_chal_tien_du_protecteur_des_marionnettistes.png" alt="Marionnette à fils, le Maréchal Tien Du Yuan Shuai (田都元帥), protecteur des marionnettistes" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
+    <div class="image-caption">Marionnette à fils, le Maréchal Tien Du Yuan Shuai (田都元帥), protecteur des marionnettistes</div>
+</div>
+
+<!-- Spectacle L'Enfant Magique et le Roi Dragon -->
+<div id="enfant-magique" class="content-section">
+    <h2 class="show-title">L'Enfant Magique et le Roi Dragon</h2>
+    <p class="show-subtitle">Spectacle musical d'ombres chinoises</p>
+    <p style="text-align: center; margin: 10px 0 20px 0;"><a href="https://www.youtube.com/watch?v=_GsBTxsf9iY" target="_blank" rel="noopener" style="color: #d32f2f; text-decoration: none; font-size: 14px;">▶ Voir un extrait</a></p>
+    
+    <div class="image-container">
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/spectacle_musical_d_ombres_chinoises.png" alt="Spectacle musical d'ombres chinoises" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
+        <div class="image-caption">Spectacle musical d'ombres chinoises</div>
+    </div>
+    
+    <p><strong>Malgré tous ses efforts pour être sage, Lo Zha, l'enfant magique, fait des gaffes bien plus grosses que lui.</strong></p>
+    
+    <p><strong>Alors, le tigre se prend une raclée, l'arrogant Roi Dragon et son fils vantard se plaignent, des fantômes se font tournebouler et le Roi des Enfers s'exaspère. Lo Zha devra passer par bien des épreuves avant que l'Empereur de Jade lui-même ne fasse reconnaître à tous ses vrais mérites.</strong></p>
+    
+    <p>Le spectacle est entièrement réalisé en ombres chinoises en peau de buffle finement ciselées et colorées et anciennes pour la plupart, provenant de la collection du Théâtre du Petit Miroir.</p>
+    
+    <p>L'Enfant Magique et le Roi Dragon a été présenté dans le monde entier : en France, en Europe, en Afrique du Nord, dans l'Océan Indien et en Amérique du Sud, en Asie Centrale et en Extrême Orient à Taiwan et à Singapour, à Macao, Hong Kong et en Chine à Canton, Shang Hai, Wu Han, Xi An et Pékin. En octobre 2023, il a été présenté au public de Dili, la capitale du Timor Oriental, pour une série de 6 représentations.</p>
+    
+    <p><em>« L'Enfant Magique et le Roi Dragon » a été le premier spectacle invité au Musée du Quai Branly.</em></p>
+</div>
+
+<!-- Critiques presse L'Enfant Magique -->
+<div class="press-section">
+    <h3 class="section-title">Le spectacle vu par la presse française…</h3>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Le Midi Libre</div>
+        <p>« Réalisé dans la pure tradition du théâtre d'ombres chinois, ce spectacle fut tout simplement un ravissement. A l'émerveillement du spectacle des ombres s'ajoutait une musique rare et superbe. »</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Nice-Matin</div>
+        <p>« Il faut se méfier des idées reçues. En particulier en matière d'ombres chinoises ! Il n'y a pas plus coloré que celles-ci ! Un public enchanté, composé d'enfants et d'adultes, l'a découvert ... au Musée des Arts Asiatiques… il y eut de quoi s'étonner devant l'écran blanc sur lequel défilaient des morceaux de rêves. Bien sûr, les adultes ne furent pas les derniers à s'émerveiller. »</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">La Nouvelle République du Centre</div>
+        <p>« Le talent et les prouesses techniques de Jean-Luc Penso ont captivé et ont subjugué plus d'un millier de jeunes lors des séances qui se sont succédées au Théâtre d'Amboise. »</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Le Nouvel Observateur</div>
+        <p>« Jean-Luc Penso manie de délicates ombres chinoises pour conter en musique les aventures de Lozha, l'enfant magique. »</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Le Maine Libre</div>
+        <p>« Le passage du Théâtre du Petit Miroir à Changé a été l'occasion de découvrir ce théâtre d'ombres chinoises en couleur, dans la ligne pure de cet art. »</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Télérama</div>
+        <p>« Les ombres sont de véritables objets d'art reconstitués d'après une technique chinoise très ancienne : la peau de buffle finement découpée en lamelles devient translucide pour laisser passer l'éclairage. Magnifique »</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">92 Express</div>
+        <p>« Manipulées et rendues vivantes par le marionnettiste, ces ombres savent merveilleusement éclairer l'imagination des enfants, mais aussi des grands. »</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Le Parisien</div>
+        <p>« Gros coup de cœur pour "L'Enfant Magique et le roi Dragon". Les enfants sont suspendus aux périples de Lozha doté de pouvoirs magiques et d'une force redoutable. Un spectacle d'ombres chinoises envoûtant. »</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Zurban</div>
+        <p>« Dépaysement assuré pour ce spectacle d'ombres dans la plus pure tradition chinoise. Aventures, rebondissements, ruses et moqueries d'après un récit mythologique, conté et mis en scène par un maître du genre, Jean-Luc Penso. Un ravissement. »</p>
+    </div>
+    
+    <div style="text-align: center; margin: 30px 0; padding: 20px 0; border-top: 1px solid #ccc;">
+        <h3 style="color: #555; font-family: 'Lora', Georgia, serif; font-size: clamp(17px, 3.5vw, 21px); font-weight: 600; margin-bottom: 20px; letter-spacing: 0.2px;">...et par la presse étrangère</h3>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Macau Daily News (Chine)</div>
+        <p>Un Français fait revivre toute la magie du théâtre chinois. Les corps des personnages, leurs mains et leurs pieds sont vivants et très habiles, leurs formes sont belles... La musique, les lumières et les décors ajoutent à la réussite du spectacle.</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Novaya Gazeta (Moscou)</div>
+        <p>Jean-Luc Penso est un homme-théâtre absolu. A le regarder depuis les coulisses, on le voit à chaque seconde décrocher de leur support métallique ses petites figurines en peau de buffle, colorées et translucides, les agiter sur l'écran blanc, appuyer, tout en dansant, sur d'invisibles boutons.</p>
+    </div>
+</div>
+
+<!-- Spectacle Le Singe Blanc et le Roi Dragon -->
+<div id="singe-blanc" class="content-section">
+    <h2 class="show-title">Le Singe Blanc et le Roi Dragon</h2>
+    <p class="show-subtitle">Spectacle musical de marionnettes à gaines</p>
+    <p style="text-align: center; margin: 10px 0 20px 0;"><a href="https://www.youtube.com/watch?v=PUU7h31uXsw" target="_blank" rel="noopener" style="color: #d32f2f; text-decoration: none; font-size: 14px;">▶ Voir un extrait</a></p>
+    
+    <div class="image-container">
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/singe_blanc_roi_dragon.png" alt="Le Singe Blanc et le Roi Dragon" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
+        <div class="image-caption">Le Singe Blanc et le Roi Dragon</div>
+    </div>
+    
+    <p><strong>Héros incontournable de la culture populaire chinoise, le Singe Blanc, Sun wu Kong, le roi des singes, est un personnage peu recommandable. Imbu de lui-même, fantasque et prétentieux, il a pourtant gagné la sympathie de tous les Chinois depuis des siècles.</strong></p>
+    
+    <p><strong>Son arrogance le pousse à s'en prendre à bien plus fort que lui, son humour séduit le rétif, sa ruse suscite l'admiration de tous. Il a quelques raisons d'être sûr de lui : Bouddha préside à sa naissance. Il apprend l'art des métamorphoses en un instant, et même le roi des Buffles ne lui fait pas peur. Mais le roi des singes est trop ambitieux : il veut être empereur à la place de l'empereur de Jade. Ni la force ni la ruse ne parviennent à le calmer. Alors, le Roi Dragon est bien malmené au fond des océans et le Roi des Enfers est envoyé à tous les diables. Cela se terminera mal (momentanément) pour le Singe Blanc, mais ceci est une autre histoire !</strong></p>
+</div>
+
+<!-- Critiques presse Le Singe Blanc -->
+<div class="press-section">
+    <h3 class="section-title">Le Singe Blanc et le Roi Dragon vu par la presse…</h3>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Le Monde</div>
+        <p>« On suit le singe dans ses rocambolesques aventures. Toute la magie du spectacle tient dans la précision du maniement des marionnettes à gaine, qui arborent de somptueux costumes moirés et manient le sabre comme si elles étaient vivantes. »</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">France Soir</div>
+        <p>« Que la culture chinoise ancienne vous passionne ou non, ne manquez surtout pas ce spectacle. Manipulées par deux virtuoses de l'art, cette création est une véritable petite merveille. »</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">L'Express</div>
+        <p>« Formé à l'école de Taipei, Jean-Luc Penso manipule ses marionnettes à gaine avec une dextérité rare. Les enfants jubilent. Les parents sont fascinés. »</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Le Parisien</div>
+        <p>« Le Singe Blanc et le Roi Dragon : un joyeux charivari qui ravit les marmots aussi bien émerveillés par cette histoire que par les créatures de tissu, habilement manipulées par Jean-Luc Penso. Un ravissement. »</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Le Monde</div>
+        <p>« Ce spectacle a été créé à la Cité de la Musique, accompagné par un orchestre de Taiwan. Cette fois, c'est sans l'orchestre mais avec la même facétieuse virtuosité que, dans le charmant Théâtre du Petit Miroir, le roi singe retrouve ses costumes chamarrés et son castelet doré. »</p>
+    </div>
+    
+    <div class="press-quote">
+        <div class="press-outlet">Zurban</div>
+        <p>« Le Singe Blanc et le Roi Dragon c'est d'abord un spectacle musical magique. L'occasion de découvrir l'univers raffiné des marionnettes taiwanaises. Une expérience inoubliable, à ne manquer sous aucun prétexte. »</p>
+    </div>
+</div>
+
+<div class="contact-info">
+    <h3 class="section-title">Théâtre du Petit Miroir</h3>
+    <p><strong>5 rue Choron 75009 Paris</strong></p>
+    <p><strong>Tél : 06 83 08 81 99</strong></p>
+    <p><a href="http://theatredupetitmiroir.com/">theatredupetitmiroir.com</a></p>
+    <p><a href="mailto:theatredupetitmiroir@gmail.com">theatredupetitmiroir@gmail.com</a></p>
+    
+    <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+        <a href="https://www.facebook.com/PENSOJeanLuc/" target="_blank" rel="noopener" style="color: #1877f2; text-decoration: none; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            Facebook
+        </a>
+        <a href="https://www.youtube.com/user/theatrepetitmiroir/featured" target="_blank" rel="noopener" style="color: #ff0000; text-decoration: none; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            YouTube
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
