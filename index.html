@@ -365,6 +365,86 @@
             border-radius: 8px;
             box-shadow: 0 8px 40px rgba(0,0,0,0.5);
             animation: zoomIn 0.3s ease;
+            transition: transform 0.2s ease;
+            cursor: grab;
+        }
+        
+        .lightbox-content:active {
+            cursor: grabbing;
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            padding: 15px 25px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .zoom-slider {
+            width: 200px;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .zoom-slider-track {
+            height: 100%;
+            background: linear-gradient(90deg, #c62828, #ff5252);
+            border-radius: 3px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .zoom-slider-thumb {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            cursor: grab;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .zoom-slider-thumb:active {
+            cursor: grabbing;
+        }
+        
+        .zoom-button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+        
+        .zoom-button:hover {
+            background: rgba(198,40,40,0.8);
+        }
+        
+        .zoom-value {
+            min-width: 50px;
+            text-align: center;
+            font-weight: 600;
         }
         
         .lightbox-close {
@@ -412,9 +492,22 @@
 <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
     <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
     <img id="lightbox-img" class="lightbox-content" src="" alt="">
+    <div class="zoom-controls">
+        <button class="zoom-button" onclick="zoomOut(event)">−</button>
+        <div class="zoom-slider" id="zoom-slider">
+            <div class="zoom-slider-track" id="zoom-slider-track"></div>
+            <div class="zoom-slider-thumb" id="zoom-slider-thumb"></div>
+        </div>
+        <button class="zoom-button" onclick="zoomIn(event)">+</button>
+        <span class="zoom-value" id="zoom-value">100%</span>
+    </div>
 </div>
 
 <script>
+let currentZoom = 1;
+let isDragging = false;
+let startX, startY, translateX = 0, translateY = 0;
+
 function openLightbox(imgSrc, imgAlt) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -422,6 +515,12 @@ function openLightbox(imgSrc, imgAlt) {
     lightboxImg.alt = imgAlt;
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    // Réinitialiser le zoom
+    currentZoom = 1;
+    translateX = 0;
+    translateY = 0;
+    updateZoom();
 }
 
 function closeLightbox(event) {
@@ -429,8 +528,106 @@ function closeLightbox(event) {
         const lightbox = document.getElementById('lightbox');
         lightbox.classList.remove('active');
         document.body.style.overflow = 'auto';
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
     }
 }
+
+function setZoom(zoom) {
+    currentZoom = Math.max(0.5, Math.min(5, zoom));
+    updateZoom();
+}
+
+function updateZoom() {
+    const lightboxImg = document.getElementById('lightbox-img');
+    const zoomValue = document.getElementById('zoom-value');
+    const sliderThumb = document.getElementById('zoom-slider-thumb');
+    const sliderTrack = document.getElementById('zoom-slider-track');
+    
+    lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom})`;
+    zoomValue.textContent = Math.round(currentZoom * 100) + '%';
+    
+    // Mettre à jour le slider (50% = zoom 1, 0% = zoom 0.5, 100% = zoom 5)
+    const percent = ((currentZoom - 0.5) / 4.5) * 100;
+    sliderThumb.style.left = percent + '%';
+    sliderTrack.style.width = percent + '%';
+}
+
+function zoomIn(event) {
+    event.stopPropagation();
+    setZoom(currentZoom + 0.2);
+}
+
+function zoomOut(event) {
+    event.stopPropagation();
+    setZoom(currentZoom - 0.2);
+}
+
+// Zoom avec la molette
+document.getElementById('lightbox').addEventListener('wheel', function(e) {
+    if (e.target.id === 'lightbox-img' || e.target.closest('.lightbox')) {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.1 : 0.1;
+        setZoom(currentZoom + delta);
+    }
+}, { passive: false });
+
+// Dragging du slider
+const zoomSlider = document.getElementById('zoom-slider');
+const zoomSliderThumb = document.getElementById('zoom-slider-thumb');
+let isSliderDragging = false;
+
+function updateZoomFromSlider(clientX) {
+    const rect = zoomSlider.getBoundingClientRect();
+    const percent = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+    const zoom = 0.5 + (percent / 100) * 4.5;
+    setZoom(zoom);
+}
+
+zoomSlider.addEventListener('mousedown', function(e) {
+    e.stopPropagation();
+    isSliderDragging = true;
+    updateZoomFromSlider(e.clientX);
+});
+
+zoomSliderThumb.addEventListener('mousedown', function(e) {
+    e.stopPropagation();
+    isSliderDragging = true;
+});
+
+document.addEventListener('mousemove', function(e) {
+    if (isSliderDragging) {
+        e.preventDefault();
+        updateZoomFromSlider(e.clientX);
+    }
+    
+    // Dragging de l'image
+    if (isDragging) {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        translateX += dx;
+        translateY += dy;
+        startX = e.clientX;
+        startY = e.clientY;
+        updateZoom();
+    }
+});
+
+document.addEventListener('mouseup', function() {
+    isSliderDragging = false;
+    isDragging = false;
+});
+
+// Dragging de l'image zoomée
+document.getElementById('lightbox-img').addEventListener('mousedown', function(e) {
+    if (currentZoom > 1) {
+        e.preventDefault();
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+    }
+});
 
 // Fermer avec la touche Échap
 document.addEventListener('keydown', function(event) {
@@ -439,6 +636,9 @@ document.addEventListener('keydown', function(event) {
         if (lightbox.classList.contains('active')) {
             lightbox.classList.remove('active');
             document.body.style.overflow = 'auto';
+            currentZoom = 1;
+            translateX = 0;
+            translateY = 0;
         }
     }
 });
