@@ -585,6 +585,7 @@ function updateZoomFromSlider(clientX) {
     setZoom(zoom);
 }
 
+// Événements souris pour le slider
 zoomSlider.addEventListener('mousedown', function(e) {
     e.stopPropagation();
     isSliderDragging = true;
@@ -592,6 +593,18 @@ zoomSlider.addEventListener('mousedown', function(e) {
 });
 
 zoomSliderThumb.addEventListener('mousedown', function(e) {
+    e.stopPropagation();
+    isSliderDragging = true;
+});
+
+// Événements tactiles pour le slider
+zoomSlider.addEventListener('touchstart', function(e) {
+    e.stopPropagation();
+    isSliderDragging = true;
+    updateZoomFromSlider(e.touches[0].clientX);
+});
+
+zoomSliderThumb.addEventListener('touchstart', function(e) {
     e.stopPropagation();
     isSliderDragging = true;
 });
@@ -614,18 +627,51 @@ document.addEventListener('mousemove', function(e) {
     }
 });
 
+document.addEventListener('touchmove', function(e) {
+    if (isSliderDragging) {
+        e.preventDefault();
+        updateZoomFromSlider(e.touches[0].clientX);
+    }
+    
+    // Dragging de l'image
+    if (isDragging && e.touches.length === 1) {
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        translateX += dx;
+        translateY += dy;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        updateZoom();
+    }
+});
+
 document.addEventListener('mouseup', function() {
     isSliderDragging = false;
     isDragging = false;
 });
 
-// Dragging de l'image zoomée
+document.addEventListener('touchend', function() {
+    isSliderDragging = false;
+    isDragging = false;
+});
+
+// Dragging de l'image zoomée (souris)
 document.getElementById('lightbox-img').addEventListener('mousedown', function(e) {
     if (currentZoom > 1) {
         e.preventDefault();
         isDragging = true;
         startX = e.clientX;
         startY = e.clientY;
+    }
+});
+
+// Dragging de l'image zoomée (tactile)
+document.getElementById('lightbox-img').addEventListener('touchstart', function(e) {
+    if (currentZoom > 1 && e.touches.length === 1) {
+        e.preventDefault();
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
     }
 });
 
