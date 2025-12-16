@@ -175,6 +175,7 @@
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
         }
         
         .image-caption {
@@ -337,9 +338,111 @@
                 max-width: 140px;
             }
         }
+        
+        /* Lightbox pour afficher les images en grand */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s ease;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+            line-height: 1;
+            padding-bottom: 5px;
+        }
+        
+        .lightbox-close:hover {
+            background: rgba(198,40,40,0.8);
+        }
+        
+        .clickable-image {
+            cursor: pointer;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+    <img id="lightbox-img" class="lightbox-content" src="" alt="">
+</div>
+
+<script>
+function openLightbox(imgSrc, imgAlt) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = imgSrc;
+    lightboxImg.alt = imgAlt;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(event) {
+    if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Fermer avec la touche Échap
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' || event.key === 'Esc') {
+        const lightbox = document.getElementById('lightbox');
+        if (lightbox.classList.contains('active')) {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    }
+});
+</script>
 
 <div class="header">
     <img src="https://static.wixstatic.com/media/66b6e6_7e5ea08afb054f2eae7e46fdcfb24d2a~mv2.jpeg" alt="Logo Théâtre du Petit Miroir" class="logo" />
@@ -405,13 +508,13 @@
     
     <div style="display: flex; justify-content: center; align-items: flex-start; gap: 30px; flex-wrap: wrap; margin-top: 30px; margin-bottom: 50px;">
         <div style="flex: 1; min-width: 280px; max-width: 450px; text-align: center;">
-            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_gaine_de_pres.jpeg" alt="Gros plan sur une marionnette à gaine" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"/>
+            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_gaine_de_pres.jpeg" alt="Gros plan sur une marionnette à gaine" class="clickable-image" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="openLightbox(this.src, this.alt)"/>
             <div style="margin-top: 15px; font-size: clamp(14px, 3vw, 16px); color: #333; font-weight: 500;">Marionnettes à gaine - Détail de la tête</div>
             <div style="margin-top: 8px; font-size: clamp(12px, 2.5vw, 14px); color: #666; font-style: italic;">Finesse du maquillage et des expressions</div>
         </div>
         
         <div style="flex: 1; min-width: 280px; max-width: 450px; text-align: center;">
-            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombre_de_pres.jpeg" alt="Gros plan sur une ombre chinoise" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"/>
+            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombre_de_pres.jpeg" alt="Gros plan sur une ombre chinoise" class="clickable-image" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="openLightbox(this.src, this.alt)"/>
             <div style="margin-top: 15px; font-size: clamp(14px, 3vw, 16px); color: #333; font-weight: 500;">Ombre chinoise - Détail du visage</div>
             <div style="margin-top: 8px; font-size: clamp(12px, 2.5vw, 14px); color: #666; font-style: italic;">Ciselage délicat de la peau de buffle</div>
         </div>
@@ -420,15 +523,15 @@
     <!-- Galerie de trois pièces remarquables - IMAGES PLUS GRANDES -->
     <div style="display: flex; justify-content: center; align-items: flex-start; gap: 30px; flex-wrap: wrap; margin: 40px 0;">
         <div style="flex: 0 1 300px; text-align: center;">
-            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/palanquin_ombres_he_pei.png" alt="Palanquin, ombres du He Pei" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"/>
+            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/palanquin_ombres_he_pei.png" alt="Palanquin, ombres du He Pei" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="openLightbox(this.src, this.alt)"/>
             <div style="margin-top: 12px; font-size: clamp(13px, 2.8vw, 15px); color: #555; font-style: italic; line-height: 1.4;">Palanquin, ombres du He Pei</div>
         </div>
         <div style="flex: 0 1 300px; text-align: center;">
-            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_fu_jian_premier_ministre.png" alt="Marionnette du Fu Jian - Premier ministre" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"/>
+            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_fu_jian_premier_ministre.png" alt="Marionnette du Fu Jian - Premier ministre" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="openLightbox(this.src, this.alt)"/>
             <div style="margin-top: 12px; font-size: clamp(13px, 2.8vw, 15px); color: #555; font-style: italic; line-height: 1.4;">Marionnette du Fu Jian - Premier ministre</div>
         </div>
         <div style="flex: 0 1 300px; text-align: center;">
-            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombre_shanxi_general_barbare.png" alt="Ombre du Shanxi - Général barbare" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"/>
+            <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombre_shanxi_general_barbare.png" alt="Ombre du Shanxi - Général barbare" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="openLightbox(this.src, this.alt)"/>
             <div style="margin-top: 12px; font-size: clamp(13px, 2.8vw, 15px); color: #555; font-style: italic; line-height: 1.4;">Ombre du Shanxi - Général barbare</div>
         </div>
     </div>
@@ -436,7 +539,7 @@
     <h3 style="color: #c62828; font-family: 'Lora', Georgia, serif; font-size: clamp(20px, 4vw, 26px); font-weight: 600; text-align: center; margin: 50px 0 30px 0; letter-spacing: 0.3px;">Sur les arts du spectacle chinois</h3>
     
     <div style="text-align: center; margin: 30px 0;">
-        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/exposition_collection_musee_theatre_forain_artenay.png" alt="Exposition de la collection - Musée du théâtre forain, Artenay" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"/>
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/exposition_collection_musee_theatre_forain_artenay.png" alt="Exposition de la collection - Musée du théâtre forain, Artenay" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer;" onclick="openLightbox(this.src, this.alt)"/>
         <div style="font-style: italic; color: #666; font-size: clamp(12px, 2.5vw, 14px); margin-top: 10px;">Exposition de la collection - Musée du théâtre forain, Artenay</div>
     </div>    
     <p style="margin-bottom: 18px; text-align: justify; font-size: clamp(15px, 2.8vw, 17px); line-height: 1.7;">Depuis 1976, le Théâtre du Petit Miroir s'est attaché à recueillir des marionnettes, des ombres, et des costumes d'opéra jusque dans les régions les plus reculées de Chine et de Taiwan.</p>
@@ -444,12 +547,12 @@
     <p style="margin-bottom: 18px; text-align: justify; font-size: clamp(15px, 2.8vw, 17px); line-height: 1.7;">Sauvées des destructions d'objets d'art ordonnées par les autorités chinoises en 1966, ou, pour celles venant de Taiwan, témoins d'une culture traditionnelle aujourd'hui menacée de disparition par le fulgurant développement économique de l'île, ces ombres et ces marionnettes sont présentées en exposition par le Théâtre du Petit Miroir et utilisées dans ses spectacles.</p>
     
     <div style="text-align: center; margin: 35px 0;">
-        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/castelet_en_bois_de_camphrier_recouvert_de_feuilles_d_or_utilis_pour_les_spectacles_de_marionnettes.png" alt="Castelet en bois de camphrier recouvert de feuilles d'or" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"/>
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/castelet_en_bois_de_camphrier_recouvert_de_feuilles_d_or_utilis_pour_les_spectacles_de_marionnettes.png" alt="Castelet en bois de camphrier recouvert de feuilles d'or" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer;" onclick="openLightbox(this.src, this.alt)"/>
         <div style="font-style: italic; color: #666; font-size: clamp(12px, 2.5vw, 14px); margin-top: 10px;">Castelet en bois de camphrier recouvert de feuilles d'or utilisé pour les spectacles de marionnettes</div>
     </div>
     
     <div style="text-align: center; margin: 35px 0;">
-        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/costume_general_armure_opera_pekin.png" alt="Costume de général, armure - Opéra de Pékin" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"/>
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/costume_general_armure_opera_pekin.png" alt="Costume de général, armure - Opéra de Pékin" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer;" onclick="openLightbox(this.src, this.alt)"/>
         <div style="font-style: italic; color: #666; font-size: clamp(12px, 2.5vw, 14px); margin-top: 10px;">Costume de général, armure. Opéra de Pékin</div>
     </div>    
     <p style="margin-bottom: 18px; text-align: justify; font-size: clamp(15px, 2.8vw, 17px); line-height: 1.7;">L'exposition présentée par le Théâtre du Petit Miroir comprend des marionnettes des 19ème et 20ème siècles - marionnettes à gaine, à tiges, à fils, provenant des différentes provinces de la Chine.</p>
@@ -465,7 +568,7 @@
     <p style="margin-bottom: 25px; text-align: justify; font-size: clamp(15px, 2.8vw, 17px); line-height: 1.7;">La collection constitue également un formidable support pour des conférences, des animations et des ateliers pédagogiques offrant un panorama complet de l'art des marionnettes et des ombres en Chine.</p>
     
     <div style="text-align: center; margin: 35px 0 0 0;">
-        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/livret_de_conteur_r_citant_th_tre_d_ombres_du_shanxi.png" alt="Livret de conteur récitant théâtre d'ombres du Shanxi" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"/>
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/livret_de_conteur_r_citant_th_tre_d_ombres_du_shanxi.png" alt="Livret de conteur récitant théâtre d'ombres du Shanxi" class="clickable-image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer;" onclick="openLightbox(this.src, this.alt)"/>
         <div style="font-style: italic; color: #666; font-size: clamp(12px, 2.5vw, 14px); margin-top: 10px;">Livret de conteur récitant théâtre d'ombres du Shanxi</div>
     </div>
 </div>
@@ -508,7 +611,7 @@
     <h3 class="section-title">Histoire du Théâtre du Petit Miroir</h3>
     
     <div class="image-container">
-        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/castelet_en_bois_de_camphrier_recouvert_de_feuilles_d_or_utilis_pour_les_spectacles_de_marionnettes.png" alt="Castelet en bois de camphrier recouvert de feuilles d'or" />
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/castelet_en_bois_de_camphrier_recouvert_de_feuilles_d_or_utilis_pour_les_spectacles_de_marionnettes.png" alt="Castelet en bois de camphrier recouvert de feuilles d'or" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
         <div class="image-caption">Castelet en bois de camphrier recouvert de feuilles d'or utilisé pour les spectacles de marionnettes</div>
     </div>
     
@@ -528,27 +631,27 @@
 </div>
 
 <div class="image-container">
-    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnettes_gaines.png" alt="Marionnettes à gaines" />
+    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnettes_gaines.png" alt="Marionnettes à gaines" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
     <div class="image-caption">Marionnettes à gaines</div>
 </div>
 
 <div class="image-container">
-    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombres_shanxi_dong_lu_palais_imperial.png" alt="Ombres du ShanXi style Dong Lu - Palais impérial" />
+    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombres_shanxi_dong_lu_palais_imperial.png" alt="Ombres du ShanXi style Dong Lu - Palais impérial" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
     <div class="image-caption">Ombres du ShanXi style Dong Lu palais impérial</div>
 </div>
 
 <div class="image-container">
-    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombres_shanxi_dong_lu_procession_imperiale.png" alt="Ombres du ShanXi style Dong Lu - Procession impériale" />
+    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/ombres_shanxi_dong_lu_procession_imperiale.png" alt="Ombres du ShanXi style Dong Lu - Procession impériale" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
     <div class="image-caption">Ombres du ShanXi style Dong Lu procession impériale</div>
 </div>
 
 <div class="image-container">
-    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/costume_premier_ministre_opera_pekin_soie_fil_or.png" alt="Costume de premier Ministre, opéra de Pékin (soie et fil d'or)" />
+    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/costume_premier_ministre_opera_pekin_soie_fil_or.png" alt="Costume de premier Ministre, opéra de Pékin (soie et fil d'or)" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
     <div class="image-caption">Costume de premier Ministre, opéra de Pékin (soie et fil d'or)</div>
 </div>
 
 <div class="image-container">
-    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_fils_tien_du_yuan_shuia_le_mar_chal_tien_du_protecteur_des_marionnettistes.png" alt="Marionnette à fils Tien Du Yuan Shuia - Le Maréchal protecteur" />
+    <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/marionnette_fils_tien_du_yuan_shuia_le_mar_chal_tien_du_protecteur_des_marionnettistes.png" alt="Marionnette à fils Tien Du Yuan Shuia - Le Maréchal protecteur" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
     <div class="image-caption">Marionnette à fils "Tien Du Yuan Shuia" Le Maréchal Tien Du protecteur des marionnettistes</div>
 </div>
 
@@ -559,7 +662,7 @@
     <p style="text-align: center; margin: 10px 0 20px 0;"><a href="https://www.youtube.com/watch?v=_GsBTxsf9iY" target="_blank" rel="noopener" style="color: #d32f2f; text-decoration: none; font-size: 14px;">▶ Voir la vidéo sur YouTube</a></p>
     
     <div class="image-container">
-        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/spectacle_musical_d_ombres_chinoises.png" alt="Spectacle musical d'ombres chinoises" />
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/spectacle_musical_d_ombres_chinoises.png" alt="Spectacle musical d'ombres chinoises" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
         <div class="image-caption">Spectacle musical d'ombres chinoises</div>
     </div>
     
@@ -645,7 +748,7 @@
     <p style="text-align: center; margin: 10px 0 20px 0;"><a href="https://www.youtube.com/watch?v=PUU7h31uXsw" target="_blank" rel="noopener" style="color: #d32f2f; text-decoration: none; font-size: 14px;">▶ Voir la vidéo sur YouTube</a></p>
     
     <div class="image-container">
-        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/singe_blanc_roi_dragon.png" alt="Le Singe Blanc et le Roi Dragon" />
+        <img src="https://raw.githubusercontent.com/JIMROCKBAN/dossier-presse-collection-et-marionnettes-D-cembre-2025/master/singe_blanc_roi_dragon.png" alt="Le Singe Blanc et le Roi Dragon" class="clickable-image" onclick="openLightbox(this.src, this.alt)" />
         <div class="image-caption">Le Singe Blanc et le Roi Dragon</div>
     </div>
     
