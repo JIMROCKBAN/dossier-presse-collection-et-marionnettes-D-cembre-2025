@@ -507,6 +507,8 @@
 let currentZoom = 1;
 let isDragging = false;
 let startX, startY, translateX = 0, translateY = 0;
+let initialPinchDistance = 0;
+let initialPinchZoom = 1;
 
 function openLightbox(imgSrc, imgAlt) {
     const lightbox = document.getElementById('lightbox');
@@ -564,12 +566,32 @@ function zoomOut(event) {
     setZoom(currentZoom - 0.2);
 }
 
+// Calculer distance entre deux doigts
+function getDistance(touch1, touch2) {
+    const dx = touch1.clientX - touch2.clientX;
+    const dy = touch1.clientY - touch2.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
 // Zoom avec la molette
 document.getElementById('lightbox').addEventListener('wheel', function(e) {
     if (e.target.id === 'lightbox-img' || e.target.closest('.lightbox')) {
         e.preventDefault();
         const delta = e.deltaY > 0 ? -0.1 : 0.1;
         setZoom(currentZoom + delta);
+    }
+}, { passive: false });
+
+// Empêcher le zoom de la page dans la lightbox
+document.getElementById('lightbox').addEventListener('touchstart', function(e) {
+    if (e.touches.length > 1) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+document.getElementById('lightbox').addEventListener('touchmove', function(e) {
+    if (e.touches.length > 1) {
+        e.preventDefault();
     }
 }, { passive: false });
 
@@ -667,13 +689,28 @@ document.getElementById('lightbox-img').addEventListener('mousedown', function(e
 
 // Dragging de l'image zoomée (tactile)
 document.getElementById('lightbox-img').addEventListener('touchstart', function(e) {
-    if (currentZoom > 1 && e.touches.length === 1) {
+    if (e.touches.length === 1 && currentZoom > 1) {
         e.preventDefault();
         isDragging = true;
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
+    } else if (e.touches.length === 2) {
+        // Pinch to zoom
+        e.preventDefault();
+        initialPinchDistance = getDistance(e.touches[0], e.touches[1]);
+        initialPinchZoom = currentZoom;
     }
 });
+
+// Geste pinch pour zoomer avec deux doigts
+document.getElementById('lightbox-img').addEventListener('touchmove', function(e) {
+    if (e.touches.length === 2) {
+        e.preventDefault();
+        const currentDistance = getDistance(e.touches[0], e.touches[1]);
+        const scale = currentDistance / initialPinchDistance;
+        setZoom(initialPinchZoom * scale);
+    }
+}, { passive: false });
 
 // Fermer avec la touche Échap
 document.addEventListener('keydown', function(event) {
