@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Théâtre du Petit Miroir</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #2c3e50;
+        }
+        
+        .container {
+            max-width: 900px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            padding: 60px 50px;
+            text-align: center;
+        }
+        
+        .logo {
+            max-width: 280px;
+            margin: 0 auto 40px;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-family: 'Lora', Georgia, serif;
+            color: #b71c1c;
+            font-size: clamp(32px, 5vw, 42px);
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .status {
+            display: inline-block;
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            color: #856404;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 20px 0 30px;
+            border: 2px solid #ffc107;
+        }
+        
+        .description {
+            font-size: clamp(16px, 2.5vw, 18px);
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .press-kit-card {
+            background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
+            border-radius: 15px;
+            padding: 40px 30px;
+            margin: 40px auto 0;
+            max-width: 600px;
+            text-decoration: none;
+            display: block;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(198, 40, 40, 0.3);
+        }
+        
+        .press-kit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(198, 40, 40, 0.4);
+        }
+        
+        .press-kit-title {
+            font-family: 'Lora', Georgia, serif;
+            font-size: clamp(22px, 4vw, 28px);
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .press-kit-subtitle {
+            font-size: clamp(14px, 2.5vw, 16px);
+            line-height: 1.6;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .arrow {
+            display: inline-block;
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+            font-size: 24px;
+        }
+        
+        .press-kit-card:hover .arrow {
+            transform: translateX(5px);
+        }
+        
+        footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        footer a {
+            color: #b71c1c;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px;
+            }
+            
+            .logo {
+                max-width: 200px;
+            }
+            
+            .press-kit-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://static.wixstatic.com/media/66b6e6_7e5ea08afb054f2eae7e46fdcfb24d2a~mv2.jpeg" alt="Théâtre du Petit Miroir" class="logo">
+        
+        <h1>Blog du Théâtre du Petit Miroir</h1>
+        
+        <div class="status">🚧 En cours de construction</div>
+        
+        <p class="description">
+            Bienvenue sur le nouvel espace de ressources du Théâtre du Petit Miroir. 
+            Nous préparons actuellement de nouveaux contenus pour partager avec vous 
+            l'univers fascinant des marionnettes et des ombres chinoises.
+        </p>
+        
+        <a href="/dossier-presse/" class="press-kit-card">
+            <div class="press-kit-title">
+                📁 Dossier de Presse
+                <span class="arrow">→</span>
+            </div>
+            <div class="press-kit-subtitle">
+                Collection d'ombres et de marionnettes chinoises<br>
+                Un panorama des arts du spectacle chinois
+            </div>
+        </a>
+        
+        <footer>
+            <p>
+                <a href="http://theatredupetitmiroir.com" target="_blank">Site officiel</a> · 
+                <a href="mailto:theatredupetitmiroir@gmail.com">Contact</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
