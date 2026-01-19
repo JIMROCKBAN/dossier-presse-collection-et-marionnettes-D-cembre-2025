@@ -751,30 +751,75 @@
         // Support tactile pour mobile
         let touchStartX = 0;
         let touchStartY = 0;
+        let initialDistance = 0;
+        let initialZoom = 1;
 
         document.addEventListener('touchstart', function(e) {
             const lightbox = document.getElementById('lightbox');
             if (!lightbox.classList.contains('active')) return;
 
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
+            if (e.touches.length === 2) {
+                // Pinch gesture started
+                e.preventDefault();
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                initialDistance = Math.sqrt(
+                    Math.pow(touch2.clientX - touch1.clientX, 2) +
+                    Math.pow(touch2.clientY - touch1.clientY, 2)
+                );
+                initialZoom = currentZoom;
+            } else if (e.touches.length === 1) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }
+        });
+
+        document.addEventListener('touchmove', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.touches.length === 2) {
+                // Handle pinch zoom
+                e.preventDefault();
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = Math.sqrt(
+                    Math.pow(touch2.clientX - touch1.clientX, 2) +
+                    Math.pow(touch2.clientY - touch1.clientY, 2)
+                );
+
+                const zoomDelta = (currentDistance - initialDistance) / 100;
+                const newZoom = Math.max(0.5, Math.min(3, initialZoom + zoomDelta));
+
+                if (newZoom !== currentZoom) {
+                    currentZoom = newZoom;
+                    const lightboxImage = document.getElementById('lightbox-image');
+                    const zoomLevel = document.getElementById('zoom-level');
+
+                    lightboxImage.style.transform = `scale(${currentZoom}) translate(0, 0)`;
+                    zoomLevel.textContent = Math.round(currentZoom * 100) + '%';
+                }
+            }
         });
 
         document.addEventListener('touchend', function(e) {
             const lightbox = document.getElementById('lightbox');
             if (!lightbox.classList.contains('active')) return;
 
-            const touchEndX = e.changedTouches[0].clientX;
-            const touchEndY = e.changedTouches[0].clientY;
-            const deltaX = touchStartX - touchEndX;
-            const deltaY = touchStartY - touchEndY;
+            if (e.touches.length === 0 && e.changedTouches.length === 1) {
+                // Single touch ended - check for swipe
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+                const deltaX = touchStartX - touchEndX;
+                const deltaY = touchStartY - touchEndY;
 
-            // Swipe horizontal pour navigation
-            if (Math.abs(deltaX) > 50 && Math.abs(deltaY) < 50) {
-                if (deltaX > 0) {
-                    navigateImage(1); // Swipe gauche -> image suivante
-                } else {
-                    navigateImage(-1); // Swipe droite -> image précédente
+                // Swipe horizontal pour navigation (seulement si pas zoomé)
+                if (Math.abs(deltaX) > 50 && Math.abs(deltaY) < 50 && currentZoom === 1) {
+                    if (deltaX > 0) {
+                        navigateImage(1); // Swipe gauche -> image suivante
+                    } else {
+                        navigateImage(-1); // Swipe droite -> image précédente
+                    }
                 }
             }
         });
