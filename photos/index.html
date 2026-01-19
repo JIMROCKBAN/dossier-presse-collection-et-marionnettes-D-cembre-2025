@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection de Photos - Théâtre du Petit Miroir</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .logo-container {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+
+        .title {
+            color: #c62828;
+            font-family: 'Lora', Georgia, serif;
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            color: #666;
+            font-family: 'Lora', Georgia, serif;
+            font-size: clamp(18px, 3vw, 24px);
+            font-style: italic;
+            text-align: center;
+            margin: 10px 0 25px;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .intro-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-title {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 24px;
+            color: #2e7d32;
+            margin: 40px 0 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .photo-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-image:hover {
+            transform: scale(1.02);
+        }
+
+        .photo-content {
+            padding: 20px;
+        }
+
+        .photo-number {
+            display: inline-block;
+            background: #c62828;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .photo-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 40px 0;
+            padding: 15px 30px;
+            background: #2e7d32;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .back-link:hover {
+            background: #1b5e20;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+        }
+
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            cursor: zoom-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .lightbox-text {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Boutons de navigation */
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .lightbox-nav:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: -70px;
+        }
+
+        .lightbox-next {
+            right: -70px;
+        }
+
+        /* Contrôles de zoom */
+        .lightbox-controls {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .zoom-btn {
+            width: 35px;
+            height: 35px;
+            background: #c62828;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .zoom-btn:hover {
+            background: #d32f2f;
+            transform: scale(1.1);
+        }
+
+        .zoom-level {
+            font-weight: 600;
+            color: #c62828;
+            min-width: 50px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Contact info styles */
+        .contact-info {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .section-title {
+            color: #c62828;
+            font-family: 'Lora', Georgia, serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        .contact-info p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .contact-info a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .story-title {
+            color: #c62828;
+            font-family: 'Lora', Georgia, serif;
+            font-size: clamp(24px, 4.5vw, 32px);
+            font-weight: 600;
+            margin: 40px 0 20px;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 768px) {
+            .photo-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .photo-card {
+                margin: 0 10px;
+            }
+
+            .intro-section {
+                padding: 20px;
+                margin: 0 10px 30px;
+            }
+
+            .lightbox-text {
+                padding: 15px;
+                font-size: 14px;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container" onclick="openLogoLightbox()">
+            <img src="https://static.wixstatic.com/media/66b6e6_7e5ea08afb054f2eae7e46fdcfb24d2a~mv2.jpeg" alt="Logo Théâtre du Petit Miroir" class="logo" />
+        </div>
+
+        <h1 class="title">COLLECTION DE PHOTOS</h1>
+
+        <p class="subtitle">L'Enfant Magique - Lo Zha</p>
+    </div>
+
+    <div class="intro-section">
+        <p class="intro-text">
+            Découvrez l'histoire fascinante de <strong>Lo Zha</strong>, l'enfant aux pouvoirs magiques, à travers cette collection de photographies.
+            Cette légende chinoise traditionnelle nous raconte l'aventure d'un enfant extraordinaire doté d'une force surhumaine,
+            qui doit apprendre à maîtriser ses pouvoirs pour rétablir l'harmonie entre les mondes.
+        </p>
+    </div>
+
+    <h2 class="story-title">L'Histoire de Lo Zha</h2>
+
+    <div class="photo-grid">
+        <div class="photo-card">
+            <img src="IMG_1098.JPG" alt="Le magicien Tai Yi apporte sur terre une boule de feu" class="photo-image" onclick="openLightbox('IMG_1098.JPG', 'Le magicien Tai Yi apporte sur terre une boule de feu')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 1</span>
+                <p class="photo-description">Le magicien Tai Yi apporte sur terre une boule de feu</p>
+            </div>
+        </div>
+
+        <div class="photo-card">
+            <img src="IMG_1105.JPG" alt="Celle ci contient Lo Zha un enfant aux pouvoirs magiques et à la force extraordinaire" class="photo-image" onclick="openLightbox('IMG_1105.JPG', 'Celle ci contient Lo Zha un enfant aux pouvoirs magiques et à la force extraordinaire')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 2</span>
+                <p class="photo-description">Celle ci contient Lo Zha un enfant aux pouvoirs magiques et à la force extraordinaire</p>
+            </div>
+        </div>
+
+        <div class="photo-card">
+            <img src="IMG_1108.JPG" alt="Un jour Lo Zha repousse un tigre qui l'attaque" class="photo-image" onclick="openLightbox('IMG_1108.JPG', 'Un jour Lo Zha repousse un tigre qui l\'attaque')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 3</span>
+                <p class="photo-description">Un jour Lo Zha repousse un tigre qui l'attaque</p>
+            </div>
+        </div>
+
+        <div class="photo-card">
+            <img src="IMG_1109.JPG" alt="Après avoir fait fuir le tigre, il a chaud et va se baigner. Mais sa force incroyable provoque une tempête qui fait trembler le palais du Roi Dragon" class="photo-image" onclick="openLightbox('IMG_1109.JPG', 'Après avoir fait fuir le tigre, il a chaud et va se baigner')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 4</span>
+                <p class="photo-description">Après avoir fait fuir le tigre, il a chaud et va se baigner. Mais sa force incroyable provoque une tempête qui fait trembler le palais du Roi Dragon</p>
+            </div>
+        </div>
+
+        <div class="photo-card">
+            <img src="IMG_1113.JPG" alt="Le roi Dragon envoie son fils qui ne peut rien faire. Il est même ridiculisé par Lo Zha" class="photo-image" onclick="openLightbox('IMG_1113.JPG', 'Le roi Dragon envoie son fils')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 5</span>
+                <p class="photo-description">Le roi Dragon envoie son fils qui ne peut rien faire. Il est même ridiculisé par Lo Zha</p>
+            </div>
+        </div>
+
+        <div class="photo-card">
+            <img src="IMG_1118.JPG" alt="Le Roi dragon va se plaindre au père de Lozha. Présente ses excuses mais le roi dragon furieux veut le dire à l'empereur de Jade" class="photo-image" onclick="openLightbox('IMG_1118.JPG', 'Le Roi dragon va se plaindre au père de Lozha')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 6</span>
+                <p class="photo-description">Le Roi dragon va se plaindre au père de Lozha. Présente ses excuses mais le roi dragon furieux veut le dire à l'empereur de Jade</p>
+            </div>
+        </div>
+
+        <div class="photo-card">
+            <img src="IMG_1119.JPG" alt="Lozha rattrape le Roi Roi Dragon et le transforme en asticot. Le roi dragon est encore plus furieux" class="photo-image" onclick="openLightbox('IMG_1119.JPG', 'Lozha rattrape le Roi Dragon')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 7</span>
+                <p class="photo-description">Lozha rattrape le Roi Dragon et le transforme en asticot. Le roi dragon est encore plus furieux</p>
+            </div>
+        </div>
+
+        <div class="photo-card">
+            <img src="IMG_1123.JPG" alt="Devant tant d'insolence, Lo Zha est puni, il doit rester dans la citadelle. Il trouve un arc et tire avec" class="photo-image" onclick="openLightbox('IMG_1123.JPG', 'Devant tant d\'insolence, Lo Zha est puni')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 8</span>
+                <p class="photo-description">Devant tant d'insolence, Lo Zha est puni, il doit rester dans la citadelle. Il trouve un arc et tire avec</p>
+            </div>
+        </div>
+
+        <div class="photo-card">
+            <img src="IMG_1131.JPG" alt="La flèche touche un fantôme hurleur qui n'arrête plus de rire tant la flèche le chatouille" class="photo-image" onclick="openLightbox('IMG_1131.JPG', 'La flèche touche un fantôme hurleur')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 9</span>
+                <p class="photo-description">La flèche touche un fantôme hurleur qui n'arrête plus de rire tant la flèche le chatouille</p>
+            </div>
+        </div>
+
+        <div class="photo-card">
+            <img src="IMG_1133.JPG" alt="Un autre fantôme parvient a capturer Lo Zha. Seul le Magicien Tai Yi peut le punir. Mais celui-ci le protège" class="photo-image" onclick="openLightbox('IMG_1133.JPG', 'Un autre fantôme parvient a capturer Lo Zha')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 10</span>
+                <p class="photo-description">Un autre fantôme parvient a capturer Lo Zha. Seul le Magicien Tai Yi peut le punir. Mais celui-ci le protège</p>
+            </div>
+        </div>
+
+        <div class="photo-card">
+            <img src="IMG_1141.JPG" alt="Mais pour apaiser le Roi Dragon toujours furieux, Lo Zha accepte d'aller en Enfer. Sa mère le ramène chez son Maître le Magicien Tai Yi" class="photo-image" onclick="openLightbox('IMG_1141.JPG', 'Mais pour apaiser le Roi Dragon toujours furieux')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 11</span>
+                <p class="photo-description">Mais pour apaiser le Roi Dragon toujours furieux, Lo Zha accepte d'aller en Enfer. Sa mère le ramène chez son Maître le Magicien Tai Yi</p>
+            </div>
+        </div>
+
+        <div class="photo-card">
+            <img src="IMG_1144.JPG" alt="Le Magicien Tai Yi rend ses os..." class="photo-image" onclick="openLightbox('IMG_1144.JPG', 'Le Magicien Tai Yi rend ses os...')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 12</span>
+                <p class="photo-description">Le Magicien Tai Yi rend ses os...</p>
+            </div>
+        </div>
+
+        <div class="photo-card">
+            <img src="IMG_1149.JPG" alt="Et son corp à Lo Zha" class="photo-image" onclick="openLightbox('IMG_1149.JPG', 'Et son corp à Lo Zha')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 13</span>
+                <p class="photo-description">Et son corp à Lo Zha</p>
+            </div>
+        </div>
+
+        <div class="photo-card">
+            <img src="IMG_1152.JPG" alt="LoZha retourne voir son père. l'Empereur de Jade intervient alors et explique que les pouvoirs de Lo Zha doivent aider à rétablir la paix sur la terre" class="photo-image" onclick="openLightbox('IMG_1152.JPG', 'Lo Zha retourne voir son père')">
+            <div class="photo-content">
+                <span class="photo-number">Scène 14</span>
+                <p class="photo-description">Lo Zha retourne voir son père. L'Empereur de Jade intervient alors et explique que les pouvoirs de Lo Zha doivent aider à rétablir la paix sur la terre</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="contact-info">
+        <h3 class="section-title">Théâtre du Petit Miroir</h3>
+        <p><strong>5 rue Choron 75009 Paris</strong></p>
+        <p><strong>Tél : 06 83 08 81 99</strong></p>
+        <p><a href="http://theatredupetitmiroir.com/">theatredupetitmiroir.com</a></p>
+        <p><a href="mailto:theatredupetitmiroir@gmail.com">theatredupetitmiroir@gmail.com</a></p>
+
+        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            <a href="https://www.facebook.com/PENSOJeanLuc/" target="_blank" rel="noopener" style="color: #1877f2; text-decoration: none; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                Facebook
+            </a>
+            <a href="https://www.youtube.com/user/theatrepetitmiroir/featured" target="_blank" rel="noopener" style="color: #ff0000; text-decoration: none; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                YouTube
+            </a>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <!-- Boutons de navigation -->
+            <button id="prev-btn" class="lightbox-nav lightbox-prev" onclick="navigateImage(-1)" aria-label="Image précédente">‹</button>
+            <button id="next-btn" class="lightbox-nav lightbox-next" onclick="navigateImage(1)" aria-label="Image suivante">›</button>
+
+            <!-- Bouton de fermeture -->
+            <div class="lightbox-close" onclick="closeLightbox()">×</div>
+
+            <!-- Image -->
+            <img id="lightbox-image" src="" alt="" class="lightbox-image">
+
+            <!-- Contrôles de zoom -->
+            <div class="lightbox-controls">
+                <button class="zoom-btn" onclick="zoomImage(-0.1)" aria-label="Zoom arrière">−</button>
+                <span id="zoom-level" class="zoom-level">100%</span>
+                <button class="zoom-btn" onclick="zoomImage(0.1)" aria-label="Zoom avant">+</button>
+                <button class="zoom-btn" onclick="resetZoom()" aria-label="Réinitialiser zoom">⤢</button>
+            </div>
+
+            <!-- Texte descriptif -->
+            <div id="lightbox-text" class="lightbox-text"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentImageIndex = 0;
+        let images = [];
+        let currentZoom = 1;
+        let isDragging = false;
+        let startX, startY, scrollLeft, scrollTop;
+
+        // Collecte toutes les images de la galerie
+        function initializeGallery() {
+            const photoCards = document.querySelectorAll('.photo-card');
+            images = Array.from(photoCards).map(card => {
+                const img = card.querySelector('.photo-image');
+                const description = card.querySelector('.photo-description').textContent;
+                return {
+                    src: img.src,
+                    alt: img.alt,
+                    description: description
+                };
+            });
+        }
+
+        function openLightbox(imageSrc, altText) {
+            initializeGallery();
+
+            // Trouver l'index de l'image actuelle
+            currentImageIndex = images.findIndex(img => img.src.includes(imageSrc.split('/').pop()));
+
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxText = document.getElementById('lightbox-text');
+            const zoomLevel = document.getElementById('zoom-level');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            // Réinitialiser le zoom
+            currentZoom = 1;
+            lightboxImage.style.transform = 'scale(1) translate(0, 0)';
+            zoomLevel.textContent = '100%';
+
+            lightboxImage.src = imageSrc;
+            lightboxImage.alt = altText;
+            lightboxText.textContent = altText;
+            lightboxText.style.display = 'block';
+
+            // Afficher les boutons de navigation pour les photos
+            prevBtn.style.display = 'flex';
+            nextBtn.style.display = 'flex';
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            updateNavigationButtons();
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+
+            // Réinitialiser le zoom et la position
+            currentZoom = 1;
+            lightboxImage.style.transform = 'scale(1) translate(0, 0)';
+
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            prevBtn.style.opacity = currentImageIndex > 0 ? '1' : '0.3';
+            nextBtn.style.opacity = currentImageIndex < images.length - 1 ? '1' : '0.3';
+        }
+
+        function navigateImage(direction) {
+            const newIndex = currentImageIndex + direction;
+            if (newIndex >= 0 && newIndex < images.length) {
+                currentImageIndex = newIndex;
+                const image = images[currentImageIndex];
+                const lightboxImage = document.getElementById('lightbox-image');
+                const lightboxText = document.getElementById('lightbox-text');
+
+                // Réinitialiser le zoom
+                currentZoom = 1;
+                lightboxImage.style.transform = 'scale(1) translate(0, 0)';
+                document.getElementById('zoom-level').textContent = '100%';
+
+                lightboxImage.src = image.src;
+                lightboxImage.alt = image.alt;
+                lightboxText.textContent = image.description;
+
+                updateNavigationButtons();
+            }
+        }
+
+        function zoomImage(delta) {
+            const lightboxImage = document.getElementById('lightbox-image');
+            const zoomLevel = document.getElementById('zoom-level');
+
+            currentZoom = Math.max(0.5, Math.min(3, currentZoom + delta));
+            lightboxImage.style.transform = `scale(${currentZoom}) translate(0, 0)`;
+            zoomLevel.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function resetZoom() {
+            const lightboxImage = document.getElementById('lightbox-image');
+            const zoomLevel = document.getElementById('zoom-level');
+
+            currentZoom = 1;
+            lightboxImage.style.transform = 'scale(1) translate(0, 0)';
+            zoomLevel.textContent = '100%';
+        }
+
+        // Gestionnaire d'événements pour la molette de la souris
+        document.addEventListener('wheel', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.classList.contains('active')) {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? -0.1 : 0.1;
+                zoomImage(delta);
+            }
+        });
+
+        // Gestionnaire d'événements clavier
+        document.addEventListener('keydown', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+
+            switch(e.key) {
+                case 'Escape':
+                    closeLightbox();
+                    break;
+                case 'ArrowLeft':
+                    navigateImage(-1);
+                    break;
+                case 'ArrowRight':
+                    navigateImage(1);
+                    break;
+                case '+':
+                case '=':
+                    zoomImage(0.1);
+                    break;
+                case '-':
+                    zoomImage(-0.1);
+                    break;
+                case '0':
+                    resetZoom();
+                    break;
+            }
+        });
+
+        // Gestion du drag pour les images zoomées
+        document.addEventListener('mousedown', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active') || currentZoom <= 1) return;
+
+            isDragging = true;
+            startX = e.pageX;
+            startY = e.pageY;
+            const lightboxImage = document.getElementById('lightbox-image');
+            const transform = lightboxImage.style.transform;
+            const translateMatch = transform.match(/translate\(([^,]+),\s*([^)]+)\)/);
+            scrollLeft = translateMatch ? parseFloat(translateMatch[1]) : 0;
+            scrollTop = translateMatch ? parseFloat(translateMatch[2]) : 0;
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isDragging || currentZoom <= 1) return;
+
+            e.preventDefault();
+            const lightboxImage = document.getElementById('lightbox-image');
+            const x = (e.pageX - startX) / currentZoom + scrollLeft;
+            const y = (e.pageY - startY) / currentZoom + scrollTop;
+
+            lightboxImage.style.transform = `scale(${currentZoom}) translate(${x}px, ${y}px)`;
+        });
+
+        document.addEventListener('mouseup', function() {
+            isDragging = false;
+        });
+
+        // Support tactile pour mobile
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            const deltaX = touchStartX - touchEndX;
+            const deltaY = touchStartY - touchEndY;
+
+            // Swipe horizontal pour navigation
+            if (Math.abs(deltaX) > 50 && Math.abs(deltaY) < 50) {
+                if (deltaX > 0) {
+                    navigateImage(1); // Swipe gauche -> image suivante
+                } else {
+                    navigateImage(-1); // Swipe droite -> image précédente
+                }
+            }
+        });
+
+        // Initialisation au chargement de la page
+        document.addEventListener('DOMContentLoaded', initializeGallery);
+
+        function openLogoLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxText = document.getElementById('lightbox-text');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            // Réinitialiser le zoom
+            currentZoom = 1;
+            lightboxImage.style.transform = 'scale(1) translate(0, 0)';
+            document.getElementById('zoom-level').textContent = '100%';
+
+            lightboxImage.src = 'https://static.wixstatic.com/media/66b6e6_7e5ea08afb054f2eae7e46fdcfb24d2a~mv2.jpeg';
+            lightboxImage.alt = 'Logo Théâtre du Petit Miroir';
+            lightboxText.textContent = 'Le logo représente à la fois une marionnette à gaine et c\'est aussi une stylisation du caractère Yi 亦 qui est l\'abréviation de Yi Wan Jan 亦宛然, le nom de la troupe de Maître Li Tien-lu et qui signifie : « aussi semblable » sous-entendu à la vie.';
+            lightboxText.style.display = 'block';
+
+            // Cacher les boutons de navigation pour le logo
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    </script>
+</body>
+</html>

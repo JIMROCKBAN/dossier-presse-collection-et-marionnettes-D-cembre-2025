@@ -334,6 +334,13 @@
                 font-size: 9px;
                 max-width: 140px;
             }
+            
+            .lightbox-text {
+                padding: 20px;
+                font-size: 16px;
+                margin-top: 15px;
+                max-width: 90%;
+            }
         }
         
         /* Lightbox pour afficher les images en grand */
@@ -468,8 +475,27 @@
             background: rgba(198,40,40,0.8);
         }
         
-        .clickable-image {
+        .logo-container {
             cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+        
+        .lightbox-text {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-width: 700px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            font-size: 18px;
+            line-height: 1.7;
+            color: #333;
+            font-family: 'Lora', Georgia, serif;
         }
         
         @keyframes fadeIn {
@@ -489,6 +515,9 @@
 <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
     <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
     <img id="lightbox-img" class="lightbox-content" src="" alt="">
+    <div id="lightbox-text" class="lightbox-text" style="display: none;">
+        Le logo représente à la fois une <strong>marionnette à gaine</strong> et c'est aussi une <strong>stylisation du caractère Yi 亦</strong> qui est l'abréviation de <strong>Yi Wan Jan 亦宛然</strong>, le nom de la troupe de <strong>Maître Li Tien-lu</strong> et qui signifie : <em>« aussi semblable »</em> sous-entendu à la vie.
+    </div>
     <div class="zoom-controls">
         <button class="zoom-button" onclick="zoomOut(event)">−</button>
         <div class="zoom-slider" id="zoom-slider">
@@ -507,11 +536,20 @@ let startX, startY, translateX = 0, translateY = 0;
 let initialPinchDistance = 0;
 let initialPinchZoom = 1;
 
-function openLightbox(imgSrc, imgAlt) {
+function openLightbox(imgSrc, imgAlt, showText = false) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxText = document.getElementById('lightbox-text');
+    
     lightboxImg.src = imgSrc;
     lightboxImg.alt = imgAlt;
+    
+    if (showText) {
+        lightboxText.style.display = 'block';
+    } else {
+        lightboxText.style.display = 'none';
+    }
+    
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
     
@@ -725,7 +763,9 @@ document.addEventListener('keydown', function(event) {
 </script>
 
 <div class="header">
-    <img src="https://static.wixstatic.com/media/66b6e6_7e5ea08afb054f2eae7e46fdcfb24d2a~mv2.jpeg" alt="Logo Théâtre du Petit Miroir" class="logo" />
+    <div class="logo-container" onclick="openLightbox('https://static.wixstatic.com/media/66b6e6_7e5ea08afb054f2eae7e46fdcfb24d2a~mv2.jpeg', 'Logo Théâtre du Petit Miroir', true)">
+        <img src="https://static.wixstatic.com/media/66b6e6_7e5ea08afb054f2eae7e46fdcfb24d2a~mv2.jpeg" alt="Logo Théâtre du Petit Miroir" class="logo" />
+    </div>
     
     <h1 class="title">COLLECTION D'OMBRES ET DE MARIONNETTES DU THÉÂTRE DU PETIT MIROIR</h1>
     
