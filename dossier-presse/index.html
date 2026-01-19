@@ -356,21 +356,27 @@
             justify-content: center;
             align-items: center;
             animation: fadeIn 0.3s ease;
+            flex-direction: column;
+            gap: 20px;
         }
         
         .lightbox.active {
             display: flex;
         }
         
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 8px 40px rgba(0,0,0,0.5);
             animation: zoomIn 0.3s ease;
             transition: transform 0.2s ease;
             cursor: grab;
+        }
+        
+        .lightbox-content img:active {
+            cursor: grabbing;
         }
         
         .lightbox-content:active {
@@ -510,8 +516,17 @@
         
         /* Responsive styles pour la lightbox */
         @media (max-width: 768px) {
+            .lightbox {
+                gap: 15px;
+            }
+            
             .lightbox-content {
                 max-width: 95%;
+                max-height: 60%;
+            }
+            
+            .lightbox-content img {
+                max-width: 100%;
                 max-height: 80%;
             }
             
@@ -548,9 +563,18 @@
         }
         
         @media (max-width: 480px) {
+            .lightbox {
+                gap: 10px;
+            }
+            
             .lightbox-content {
                 max-width: 98%;
-                max-height: 75%;
+                max-height: 50%;
+            }
+            
+            .lightbox-content img {
+                max-width: 100%;
+                max-height: 70%;
             }
             
             .zoom-controls {
@@ -602,19 +626,21 @@
 
 <!-- Lightbox -->
 <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
-    <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
-    <img id="lightbox-img" class="lightbox-content" src="" alt="">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+        <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="">
+        <div class="zoom-controls">
+            <button class="zoom-button" onclick="zoomOut(event)">−</button>
+            <div class="zoom-slider" id="zoom-slider">
+                <div class="zoom-slider-track" id="zoom-slider-track"></div>
+                <div class="zoom-slider-thumb" id="zoom-slider-thumb"></div>
+            </div>
+            <button class="zoom-button" onclick="zoomIn(event)">+</button>
+            <span class="zoom-value" id="zoom-value">100%</span>
+        </div>
+    </div>
     <div id="lightbox-text" class="lightbox-text" style="display: none;">
         Le logo représente à la fois une <strong>marionnette à gaine</strong> et c'est aussi une <strong>stylisation du caractère Yi 亦</strong> qui est l'abréviation de <strong>Yi Wan Jan 亦宛然</strong>, le nom de la troupe de <strong>Maître Li Tien-lu</strong> et qui signifie : <em>« aussi semblable »</em> sous-entendu à la vie.
-    </div>
-    <div class="zoom-controls">
-        <button class="zoom-button" onclick="zoomOut(event)">−</button>
-        <div class="zoom-slider" id="zoom-slider">
-            <div class="zoom-slider-track" id="zoom-slider-track"></div>
-            <div class="zoom-slider-thumb" id="zoom-slider-thumb"></div>
-        </div>
-        <button class="zoom-button" onclick="zoomIn(event)">+</button>
-        <span class="zoom-value" id="zoom-value">100%</span>
     </div>
 </div>
 
